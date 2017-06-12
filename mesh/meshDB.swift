@@ -9,6 +9,7 @@
 import Foundation
 import SQLite
 import CoreLocation
+import UIKit
 
 class meshDB {
     static let instance = meshDB()
@@ -42,7 +43,7 @@ class meshDB {
         createTable()
     }
     
-    func createTable() {
+    private func createTable() {
         do {
             try db!.run(info.create(ifNotExists: true) { table in
                 table.column(intID)
@@ -58,27 +59,44 @@ class meshDB {
         }
     }
     
-    func addMessage(id: Int, name: String, message: String, recipient: String) {
+    func addMessage(type: String, id: Int, name: String, message: String, recipient: String) {
         do {
-            let insert = info.insert(dataType <- "message", intID <- id, title <- name, detail <- message, receiver <- recipient, longitude <- nil, latitude <- nil)
+            let insert = info.insert(dataType <- type, intID <- id, title <- name, detail <- message, receiver <- recipient, longitude <- nil, latitude <- nil)
             _ = try db!.run(insert)
         } catch {
             print("Insert failed")
         }
     }
     
-    //returns array of all Message Objects
-    func getMessages() -> [Message] {
-        var messageList = [Message]()
+    //returns dict of all Messages under contact names
+    private func getMessages(type: String) -> [String: [Message]] {
+        var messageDict = [String: [Message]]()
         do {
             for info in try db!.prepare(self.info) {
-                if info[dataType] == "message" {
+                if info[dataType] == type {
                 if let tempID = info[intID] {
                 if let tempSender = info[title] {
                 if let tempReciever = info[receiver] {
                 if let tempMessage = info[detail] {
-                    messageList.append(Message(id: tempID, sender: tempSender, message: tempMessage, recipient: tempReciever))
-                                }
+                    let tempMessage = Message(id: tempID, sender: tempSender, message: tempMessage, recipient: tempReciever)
+                    
+                    //cannot make "me" a key!!!
+                    var key = ""
+                    let tempUsername = UIDevice.current.name
+                    if tempSender == "me" || tempSender == tempUsername{
+                        key = tempReciever
+                    } else if tempReciever == "me" || tempReciever == tempUsername{
+                        key = tempSender
+                    } else {
+                        key = "public"
+                    }
+                    
+                    if messageDict[key] == nil {
+                        messageDict[key] = [tempMessage]
+                    } else {
+                        messageDict[key]?.append(tempMessage)
+                    }
+                }
                             }
                         }
                     }
@@ -87,7 +105,15 @@ class meshDB {
         } catch {
             print("Select failed")
         }
-        return messageList
+        return messageDict
+    }
+    
+    func getUnsentMessages() -> [String: [Message]] {
+        return getMessages(type: "unsentMessage")
+    }
+    
+    func getDeliveredMessages() -> [String: [Message]] {
+        return getMessages(type: "message")
     }
 
     func addTag(id: Int, name: String, specifics: String, long: Double, lat: Double) {
@@ -134,15 +160,32 @@ class meshDB {
         }
     }
     
-    //limit of 10000 messages stored on phones. Maybe generalize to all objects, not only Messages
-    func clipMessageList(list: [Message]) {
-        if list.count > 10000 {
-            let tempMessage = list[0]
-            do {
-                let data = info.filter(intID == tempMessage.getID() && detail == tempMessage.getMessage())
-                try db!.run(data.delete())
-            } catch {
-                print("Delete failed")
+    func deleteMessage(msgToDelete: Message) {
+        do {
+            let data = info.filter(intID == msgToDelete.getID() && detail == msgToDelete.getMessage())
+            try db!.run(data.delete())
+        } catch {
+            print("Delete failed")
+        }
+    }
+    
+    //limit of 10000 messages stored on phones. Also depends on number of contacts you have. The more contacts you have the less messages you can store per contact. Call this when exiting the app. 
+    func clipMessageList(dict: [String: [Message]], numContacts: Int) {
+        let max = 20000
+        if dict.count > max {
+            for (_, list) in dict {
+                let overCount = list.count - max/numContacts
+                if overCount > 0 {
+                    for i in 0...overCount {
+                        let tempMessage = list[i]
+                        do {
+                            let data = info.filter(intID == tempMessage.getID() && detail == tempMessage.getMessage())
+                            try db!.run(data.delete())
+                        } catch {
+                            print("Delete failed")
+                        }
+                    }
+                }
             }
         }
     }

@@ -32,10 +32,6 @@ class NetworkServiceManager: NSObject {
         self.serviceAdvertiser.startAdvertisingPeer()
         self.serviceBrowser.delegate = self
         self.serviceBrowser.startBrowsingForPeers()
-        
-//        DispatchQueue.main.async { [unowned self] in
-//            browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 50)
-//        }
     }
     
     deinit {
@@ -72,15 +68,12 @@ class NetworkServiceManager: NSObject {
         return result
     }
     
-    //Don't use right now
-//    func refresh() {
-//        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: NetworkServiceType)
-//        self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: NetworkServiceType)
-//        self.serviceAdvertiser.delegate = self
-//        self.serviceAdvertiser.startAdvertisingPeer()
-//        self.serviceBrowser.delegate = self
-//        self.serviceBrowser.startBrowsingForPeers()
-//    }
+    func refresh() {
+        //self.serviceAdvertiser.stopAdvertisingPeer()
+        //self.serviceBrowser.stopBrowsingForPeers()
+        self.serviceAdvertiser.startAdvertisingPeer()
+        self.serviceBrowser.startBrowsingForPeers()
+    }
 }
 
 //accepts all incoming connections
@@ -103,10 +96,18 @@ extension NetworkServiceManager : MCNearbyServiceBrowserDelegate {
     internal func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "foundPeer: \(peerID)")
         NSLog("%@", "invitePeer: \(peerID)")
-        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 5)
+        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+        
+        let tempNewContact = ["newContact": peerID.displayName]
+        
+        //Hack here - Must update direct connections immediately
+        SharingManager.sharedInstance.directConnections.append(peerID.displayName)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewConnectionFound"), object: nil, userInfo: tempNewContact)
     }
 
     internal func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        //Hack here - Must update direct connections immediately
+
         NSLog("%@", "lostPeer: \(peerID)")
     }
 }
@@ -126,10 +127,6 @@ extension NetworkServiceManager : MCSessionDelegate {
         func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
             NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
             self.delegate?.connectedDevicesChanged(self, connectedDevices: session.connectedPeers.map({$0.displayName}))
-        
-//            if state.stringValue() == "Connected" {
-//                //send all data again???
-//            }
         }
     
         func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

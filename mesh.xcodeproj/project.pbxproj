@@ -12,7 +12,7 @@
 		5706435E1DEB88B9008A033A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5706435C1DEB88B9008A033A /* Main.storyboard */; };
 		570643631DEB88B9008A033A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570643611DEB88B9008A033A /* LaunchScreen.storyboard */; };
 		5706436D1DEB8993008A033A /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706436C1DEB8993008A033A /* NetworkServiceManager.swift */; };
-		570A03981DF295A300E86488 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A03971DF295A300E86488 /* CustomTableViewCell.swift */; };
+		570A749D1EAD190B00BE6FC0 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A749C1EAD190B00BE6FC0 /* Constraints.swift */; };
 		57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57117BF91E45A3DE001018D7 /* MapViewController.swift */; };
 		57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57117C031E45A655001018D7 /* CustomAnnotation.swift */; };
 		5711ED471E288D840053F00B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5711ED461E288D840053F00B /* Message.swift */; };
@@ -20,16 +20,21 @@
 		5711ED631E292D770053F00B /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5711ED551E292D400053F00B /* SQLite.framework */; };
 		571896B71E52E16600FE2934 /* plus_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 571896B61E52E16600FE2934 /* plus_button.png */; };
 		571896B91E52E44700FE2934 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571896B81E52E44700FE2934 /* Tag.swift */; };
+		57391A3B1EA9B1B200773FFF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57726EA01E616AFF0028CE3D /* libsqlite3.dylib */; };
+		57391A741EA9E11C00773FFF /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5711ED551E292D400053F00B /* SQLite.framework */; };
+		57391A751EA9E11C00773FFF /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5711ED551E292D400053F00B /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		57391A7C1EAAEFAF00773FFF /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57391A7B1EAAEFAF00773FFF /* SharedData.swift */; };
 		5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */; };
 		575051901E1F320B0066550F /* Assets 3.38.11 AM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */; };
-		57563ED71E695BE70053B4E7 /* centerpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 57563ED61E695BE70053B4E7 /* centerpic.png */; };
-		57726E9F1E616AD60028CE3D /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57FF8E731E288C8D00A307B4 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		57726EA11E616AFF0028CE3D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57726EA01E616AFF0028CE3D /* libsqlite3.dylib */; };
+		575F52F01ECA426E006BEA27 /* centerpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 575F52EF1ECA426E006BEA27 /* centerpic.png */; };
+		577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */; };
 		5785F5C91E98BA640094B5F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5785F5C81E98BA640094B5F7 /* MapKit.framework */; };
 		57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57872E8D1E331D54009E5F4C /* DataProcessor.swift */; };
 		57ADC1301E14E76B003645BB /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */; };
 		57ADC1321E14E935003645BB /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */; };
 		57ADC1361E16065A003645BB /* SharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1351E16065A003645BB /* SharingManager.swift */; };
+		57DE5B451EB257050055A67E /* FromMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE5B441EB257050055A67E /* FromMessageTableViewCell.swift */; };
+		57DE5B471EB2AE700055A67E /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE5B461EB2AE700055A67E /* PaddedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,16 +87,23 @@
 			remoteGlobalIDString = A121AC451CA35C79005A31D1;
 			remoteInfo = "SQLite watchOS";
 		};
+		57391A761EA9E11C00773FFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5711ED4A1E292D3F0053F00B /* SQLite.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EE247AD21C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5711ED671E292D770053F00B /* Embed Frameworks */ = {
+		57391A781EA9E11C00773FFF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				57726E9F1E616AD60028CE3D /* SQLite.framework in Embed Frameworks */,
+				57391A751EA9E11C00773FFF /* SQLite.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +118,7 @@
 		570643621DEB88B9008A033A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		570643641DEB88B9008A033A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5706436C1DEB8993008A033A /* NetworkServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServiceManager.swift; sourceTree = "<group>"; };
-		570A03971DF295A300E86488 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		570A749C1EAD190B00BE6FC0 /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		57117BF91E45A3DE001018D7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		57117C031E45A655001018D7 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		5711ED461E288D840053F00B /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -114,18 +126,21 @@
 		5711ED4A1E292D3F0053F00B /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = ../../SQLite.swift/SQLite.xcodeproj; sourceTree = "<group>"; };
 		571896B61E52E16600FE2934 /* plus_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_button.png; sourceTree = "<group>"; };
 		571896B81E52E44700FE2934 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		57391A7B1EAAEFAF00773FFF /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 		5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets 3.38.11 AM.xcassets"; path = "../../Assets 3.38.11 AM.xcassets"; sourceTree = "<group>"; };
-		57563ED61E695BE70053B4E7 /* centerpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centerpic.png; path = ../../../centerpic.png; sourceTree = "<group>"; };
+		575F52EF1ECA426E006BEA27 /* centerpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centerpic.png; path = ../../centerpic.png; sourceTree = "<group>"; };
 		57726EA01E616AFF0028CE3D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
+		577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToMessageTableViewCell.swift; sourceTree = "<group>"; };
 		5785F5C81E98BA640094B5F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		57872E8D1E331D54009E5F4C /* DataProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProcessor.swift; sourceTree = "<group>"; };
 		57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		57ADC1351E16065A003645BB /* SharingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingManager.swift; sourceTree = "<group>"; };
+		57DE5B441EB257050055A67E /* FromMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromMessageTableViewCell.swift; sourceTree = "<group>"; };
+		57DE5B461EB2AE700055A67E /* PaddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		57FF8E391E27D59A00A307B4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		57FF8E701E288ACB00A307B4 /* SQLite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = SQLite.playground; path = ../../SQLite.swift/SQLite.playground; sourceTree = "<group>"; };
-		57FF8E731E288C8D00A307B4 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +148,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57726EA11E616AFF0028CE3D /* libsqlite3.dylib in Frameworks */,
+				57391A3B1EA9B1B200773FFF /* libsqlite3.dylib in Frameworks */,
 				5785F5C91E98BA640094B5F7 /* MapKit.framework in Frameworks */,
+				57391A741EA9E11C00773FFF /* SQLite.framework in Frameworks */,
 				5711ED631E292D770053F00B /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,7 +161,6 @@
 		5706434C1DEB88B9008A033A = {
 			isa = PBXGroup;
 			children = (
-				57FF8E731E288C8D00A307B4 /* SQLite.framework */,
 				570643571DEB88B9008A033A /* mesh */,
 				570643561DEB88B9008A033A /* Products */,
 				57FF8E381E27D59A00A307B4 /* Frameworks */,
@@ -196,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */,
-				57563ED61E695BE70053B4E7 /* centerpic.png */,
+				575F52EF1ECA426E006BEA27 /* centerpic.png */,
 				571896B61E52E16600FE2934 /* plus_button.png */,
 			);
 			name = Icons;
@@ -217,6 +232,7 @@
 				5706435A1DEB88B9008A033A /* ViewController.swift */,
 				57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */,
 				57117BF91E45A3DE001018D7 /* MapViewController.swift */,
+				57DE5B461EB2AE700055A67E /* PaddedLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -224,8 +240,9 @@
 		571896C31E53E95C00FE2934 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				570A03971DF295A300E86488 /* CustomTableViewCell.swift */,
 				57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */,
+				577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */,
+				57DE5B441EB257050055A67E /* FromMessageTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -237,6 +254,8 @@
 				57ADC1351E16065A003645BB /* SharingManager.swift */,
 				5711ED481E28960C0053F00B /* meshDB.swift */,
 				57872E8D1E331D54009E5F4C /* DataProcessor.swift */,
+				57391A7B1EAAEFAF00773FFF /* SharedData.swift */,
+				570A749C1EAD190B00BE6FC0 /* Constraints.swift */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -271,11 +290,12 @@
 				570643511DEB88B9008A033A /* Sources */,
 				570643521DEB88B9008A033A /* Frameworks */,
 				570643531DEB88B9008A033A /* Resources */,
-				5711ED671E292D770053F00B /* Embed Frameworks */,
+				57391A781EA9E11C00773FFF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				57391A771EA9E11C00773FFF /* PBXTargetDependency */,
 			);
 			name = mesh;
 			productName = mesh;
@@ -392,7 +412,7 @@
 				570643631DEB88B9008A033A /* LaunchScreen.storyboard in Resources */,
 				571896B71E52E16600FE2934 /* plus_button.png in Resources */,
 				5706435E1DEB88B9008A033A /* Main.storyboard in Resources */,
-				57563ED71E695BE70053B4E7 /* centerpic.png in Resources */,
+				575F52F01ECA426E006BEA27 /* centerpic.png in Resources */,
 				575051901E1F320B0066550F /* Assets 3.38.11 AM.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,14 +427,18 @@
 				57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */,
 				57ADC1301E14E76B003645BB /* ChannelsViewController.swift in Sources */,
 				5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */,
+				57391A7C1EAAEFAF00773FFF /* SharedData.swift in Sources */,
+				570A749D1EAD190B00BE6FC0 /* Constraints.swift in Sources */,
+				57DE5B451EB257050055A67E /* FromMessageTableViewCell.swift in Sources */,
+				57DE5B471EB2AE700055A67E /* PaddedLabel.swift in Sources */,
 				5711ED491E28960C0053F00B /* meshDB.swift in Sources */,
 				57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */,
 				5706435B1DEB88B9008A033A /* ViewController.swift in Sources */,
 				57ADC1361E16065A003645BB /* SharingManager.swift in Sources */,
+				577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */,
 				57ADC1321E14E935003645BB /* ContactsTableViewCell.swift in Sources */,
 				570643591DEB88B9008A033A /* AppDelegate.swift in Sources */,
 				5711ED471E288D840053F00B /* Message.swift in Sources */,
-				570A03981DF295A300E86488 /* CustomTableViewCell.swift in Sources */,
 				571896B91E52E44700FE2934 /* Tag.swift in Sources */,
 				57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */,
 				5706436D1DEB8993008A033A /* NetworkServiceManager.swift in Sources */,
@@ -422,6 +446,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		57391A771EA9E11C00773FFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SQLite iOS";
+			targetProxy = 57391A761EA9E11C00773FFF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5706435C1DEB88B9008A033A /* Main.storyboard */ = {
@@ -536,6 +568,7 @@
 		570643681DEB88B9008A033A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2W9Q6VLXE;
@@ -552,6 +585,7 @@
 		570643691DEB88B9008A033A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2W9Q6VLXE;

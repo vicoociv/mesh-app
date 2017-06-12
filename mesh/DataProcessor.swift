@@ -36,12 +36,17 @@ class DataProcessor {
         return "message\(separator)\(id)\(separator)\(sender)\(separator)\(message)\(separator)\(receiver)"
     }
 
-    static func filterMessages(sender: String, recipient: String, messageList: [Message]) -> [String] {
-        var resultList = [String]()
+    static func filterMessages(contact: String, messageDict: [String: [Message]]) -> [String] {
+        var messageList: [Message] = []
+        var resultList: [String] = []
+
+        if let list = messageDict[contact] {
+            messageList = list
+            print("hellloooo")
+        }
+        
         for message in messageList {
-            if message.getSender() == sender && message.getRecipient() == recipient || message.getSender() == "me" && message.getRecipient() == sender{
-                resultList.append("\(message.getSender()):  \(message.getMessage())")
-            }
+            resultList.append("\(message.getSender()):  \(message.getMessage())")
         }
         return resultList
     }

@@ -16,19 +16,14 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var discoverList = [String]()
     var contactList = [String]()
-    var selectedList = "Contacts"
+    var selectedList = listType.Contacts
     var newContact = ""
     
-    //currently for public chat
     var displayList = [String]()
     
-    class TabBar: UITabBar {
-        override func sizeThatFits(_ size: CGSize) -> CGSize {
-            var sizeThatFits = super.sizeThatFits(size)
-            sizeThatFits.height = 38
-            
-            return sizeThatFits
-        }
+    enum listType {
+        case Contacts
+        case Discover
     }
     
     override func viewDidLoad() {
@@ -41,11 +36,12 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
         displayList = contactList
         
         tabButton.frame = CGRect(x: tabButton.frame.origin.x, y: tabButton.frame.origin.y, width: tabButton.frame.size.width, height: 90);
-
         
         //to detect long press on table
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         self.tableView.addGestureRecognizer(longPressRecognizer)
+        
+        print(SharingManager.sharedInstance.messageDict)
     }
     
     func dismissKeyboard() {
@@ -54,14 +50,13 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
     
 //Handles confirmation of new contact with popup
     func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if selectedList == "Discover" {
+        if selectedList == .Discover {
         if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
             let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
             if let tempIndex = tableView.indexPathForRow(at: touchPoint) {
                 
-                let tempName = discoverList[tempIndex.row]
-                newContact = tempName
-                let alertMessage = "Are you sure you want to add \(tempName) to your contacts?"
+                newContact = discoverList[tempIndex.row]
+                let alertMessage = "Are you sure you want to add \(newContact) to your contacts?"
 
                 //creates a default alert popup
                 let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -70,10 +65,10 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
                         self.newContact = "" }))
                 
                 alert.addAction(UIAlertAction(title: "add", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
-                    
                     //makes sure can't add duplicates
                     if !(SharingManager.sharedInstance.contactList.contains(self.newContact)) {
                         SharingManager.sharedInstance.contactList.append(self.newContact)
+                        
                         self.contactList.append(self.newContact)
                     }
                 }))
@@ -85,7 +80,6 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
  //TableView Stuff
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.displayList.count
     }
@@ -98,27 +92,22 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        if selectedList == "Contacts" {
+        if selectedList == .Contacts {
             performSegue(withIdentifier: "showPublicChat", sender: self)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if selectedList == "Contacts" && (segue.identifier == "showPublicChat") {
+        if selectedList == .Contacts && (segue.identifier == "showPublicChat") {
             let upcoming: ViewController = segue.destination as! ViewController
             if let tempIndex = tableView.indexPathForSelectedRow{
                 let cellIndex = tempIndex.row
                 
-                //passing info to second view controller
                 if SharingManager.sharedInstance.contactList.count > 0{
                     let contactNameTemp = self.contactList[cellIndex]
-                    upcoming.chatType = "direct"
-                    upcoming.contactName = contactNameTemp//passing name of contact
-                    upcoming.infoList = DataProcessor.filterMessages(sender: contactNameTemp, recipient: SharingManager.sharedInstance.username, messageList: SharingManager.sharedInstance.messageList)
-                } else {
-                    upcoming.contactName = ""
-                    upcoming.chatType = ""
-                    upcoming.infoList = [String]()
+                    upcoming.chatType = .Direct
+                    upcoming.contactName = contactNameTemp
+                    upcoming.username = SharingManager.sharedInstance.username
                 }
             }
         }
@@ -129,23 +118,22 @@ class ChannelsViewController: UIViewController, UITableViewDelegate, UITableView
 //Buttons Stuff
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
-        //SharingManager.sharedInstance.networkService.refresh()
+        SharingManager.sharedInstance.networkService.refresh()
         discoverList = SharingManager.sharedInstance.directConnections
-        if selectedList == "Discover" {
+        if selectedList == .Discover {
             displayList = discoverList
         }
         self.tableView.reloadData()
     }
     
-    //tabular button implementation
     @IBAction func listChange(_ sender: AnyObject) {
         if tabButton.selectedSegmentIndex == 0{
             displayList = contactList
-            selectedList = "Contacts"
+            selectedList = .Contacts
         }
         else if tabButton.selectedSegmentIndex == 1{
             displayList = discoverList
-            selectedList = "Discover"
+            selectedList = .Discover
         }
         else if tabButton.selectedSegmentIndex == 2{
             self.performSegue(withIdentifier: "showPublicChat", sender: self)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ni4-nv-3kU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gLF-RO-dPJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,30 +38,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Tz-ci-HXt">
-                                <rect key="frame" x="109" y="611" width="157" height="29"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Chat"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="switchView:" destination="Ni4-nv-3kU" eventType="valueChanged" id="cHi-Pq-yiH"/>
-                                    <segue destination="gLF-RO-dPJ" kind="show" identifier="showChatView" id="mtm-v5-6F1"/>
-                                </connections>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-oN-TDd">
-                                <rect key="frame" x="295" y="610" width="51" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3XL-MJ-KXm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Clear"/>
-                                <connections>
-                                    <action selector="clear" destination="Ni4-nv-3kU" eventType="touchUpInside" id="8hT-aB-270"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsk-do-2Ul">
                                 <rect key="frame" x="309" y="146" width="50" height="50"/>
                                 <constraints>
@@ -73,24 +49,51 @@
                                     <action selector="recenter" destination="Ni4-nv-3kU" eventType="touchUpInside" id="pla-mG-vzT"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Tz-ci-HXt">
+                                <rect key="frame" x="87" y="612" width="200" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="UGE-R3-6OA"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Chat"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="switchView:" destination="Ni4-nv-3kU" eventType="valueChanged" id="cHi-Pq-yiH"/>
+                                    <segue destination="gLF-RO-dPJ" kind="show" identifier="showChatView" id="mtm-v5-6F1"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-oN-TDd">
+                                <rect key="frame" x="313" y="617" width="43" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fr4-bh-QT9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clear" destination="Ni4-nv-3kU" eventType="touchUpInside" id="8hT-aB-270"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Kpi-3O-ERS" firstAttribute="top" secondItem="B0f-ah-Rn3" secondAttribute="bottom" id="0Vk-Id-shR"/>
                             <constraint firstItem="Lsk-do-2Ul" firstAttribute="top" secondItem="B0f-ah-Rn3" secondAttribute="bottom" constant="82" id="1n5-Hj-Qrn"/>
-                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="leading" secondItem="mux-Dt-7wa" secondAttribute="leadingMargin" constant="93" id="63g-qM-iyc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="V2t-oN-TDd" secondAttribute="trailing" constant="13" id="6Pp-1E-Ja6"/>
+                            <constraint firstAttribute="bottom" secondItem="9Tz-ci-HXt" secondAttribute="bottom" constant="20" symbolic="YES" id="5vp-fL-9tX"/>
                             <constraint firstItem="Kpi-3O-ERS" firstAttribute="leading" secondItem="mux-Dt-7wa" secondAttribute="leading" id="8su-Hf-EAC"/>
+                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="leading" secondItem="mux-Dt-7wa" secondAttribute="leadingMargin" constant="71" id="DxA-ik-y4f"/>
+                            <constraint firstItem="V2t-oN-TDd" firstAttribute="bottom" secondItem="9Tz-ci-HXt" secondAttribute="bottom" id="Kxj-h1-qJb"/>
                             <constraint firstAttribute="trailing" secondItem="Kpi-3O-ERS" secondAttribute="trailing" id="Lqh-P2-lmO"/>
                             <constraint firstItem="B0f-ah-Rn3" firstAttribute="top" secondItem="Lnm-9w-6hy" secondAttribute="bottom" id="SnD-z4-lSP"/>
-                            <constraint firstItem="V2t-oN-TDd" firstAttribute="leading" secondItem="9Tz-ci-HXt" secondAttribute="trailing" constant="29" id="VPa-kv-J1z"/>
                             <constraint firstItem="Kpi-3O-ERS" firstAttribute="trailing" secondItem="B0f-ah-Rn3" secondAttribute="trailing" id="WRD-Fs-dnh"/>
+                            <constraint firstItem="V2t-oN-TDd" firstAttribute="leading" secondItem="9Tz-ci-HXt" secondAttribute="trailing" constant="26" id="ZzA-zE-3BR"/>
                             <constraint firstItem="Kpi-3O-ERS" firstAttribute="leading" secondItem="B0f-ah-Rn3" secondAttribute="leading" id="ccp-cR-u71"/>
+                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="centerX" secondItem="mux-Dt-7wa" secondAttribute="centerX" id="cuw-UJ-MZZ"/>
                             <constraint firstItem="Lsk-do-2Ul" firstAttribute="trailing" secondItem="mux-Dt-7wa" secondAttribute="trailingMargin" id="e2Q-5n-GGj"/>
-                            <constraint firstItem="V2t-oN-TDd" firstAttribute="centerY" secondItem="9Tz-ci-HXt" secondAttribute="centerY" id="qyI-Bp-xT7"/>
+                            <constraint firstItem="V2t-oN-TDd" firstAttribute="centerX" secondItem="Lsk-do-2Ul" secondAttribute="centerX" id="hrC-BJ-PtZ"/>
                             <constraint firstItem="Kpi-3O-ERS" firstAttribute="bottom" secondItem="gVW-CD-ZH5" secondAttribute="top" id="tVh-TZ-vsF"/>
-                            <constraint firstItem="gVW-CD-ZH5" firstAttribute="top" secondItem="9Tz-ci-HXt" secondAttribute="bottom" constant="28" id="v4U-BL-dfK"/>
-                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="centerX" secondItem="B0f-ah-Rn3" secondAttribute="centerX" id="xjU-hc-bWd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -116,7 +119,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0n0-DA-hO2">
-                                <rect key="frame" x="16" y="124" width="343" height="514"/>
+                                <rect key="frame" x="16" y="107" width="343" height="508"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell1" rowHeight="54" id="lit-vD-4uX" customClass="ContactsTableViewCell" customModule="mesh" customModuleProvider="target">
@@ -163,21 +166,12 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-UK-yYh">
-                                <rect key="frame" x="109" y="611" width="157" height="29"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Chat"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="switchView:" destination="gLF-RO-dPJ" eventType="valueChanged" id="XbB-Nk-xcm"/>
-                                    <segue destination="Ni4-nv-3kU" kind="show" identifier="showMapView" id="2bN-Cv-rgH"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-Ni-0pM">
-                                <rect key="frame" x="0.0" y="64" width="375" height="29"/>
+                            <segmentedControl autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-Ni-0pM">
+                                <rect key="frame" x="0.0" y="64" width="375" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Ndr-fD-ISe"/>
+                                    <constraint firstAttribute="width" constant="375" id="Vea-2y-Vw8"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Contacts"/>
                                     <segment title="Discover"/>
@@ -188,22 +182,38 @@
                                     <action selector="listChange:" destination="gLF-RO-dPJ" eventType="valueChanged" id="r3G-pC-KFg"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-UK-yYh">
+                                <rect key="frame" x="86" y="612" width="191" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="ZWW-Fc-C1H"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Chat"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="switchView:" destination="gLF-RO-dPJ" eventType="valueChanged" id="XbB-Nk-xcm"/>
+                                    <segue destination="Ni4-nv-3kU" kind="show" identifier="showMapView" id="2bN-Cv-rgH"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="L01-fd-Fhg" firstAttribute="top" secondItem="Rm1-UK-yYh" secondAttribute="bottom" constant="28" id="4vb-yn-WDF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rm1-UK-yYh" secondAttribute="trailing" constant="82" id="02e-aa-gnP"/>
+                            <constraint firstItem="0n0-DA-hO2" firstAttribute="top" secondItem="h0G-Ni-0pM" secondAttribute="bottom" constant="8" symbolic="YES" id="6a0-vz-B0c"/>
+                            <constraint firstAttribute="bottom" secondItem="Rm1-UK-yYh" secondAttribute="bottom" constant="20" symbolic="YES" id="7aB-8g-XVe"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="top" secondItem="OuR-NN-5cY" secondAttribute="bottom" id="Eow-dU-Tmx"/>
                             <constraint firstAttribute="trailing" secondItem="dzG-ZD-vD9" secondAttribute="trailing" id="HeP-wk-toG"/>
                             <constraint firstItem="h0G-Ni-0pM" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" constant="-16" id="LW7-wn-JcQ"/>
-                            <constraint firstItem="L01-fd-Fhg" firstAttribute="top" secondItem="0n0-DA-hO2" secondAttribute="bottom" constant="29" id="Qog-gp-TnK"/>
+                            <constraint firstItem="L01-fd-Fhg" firstAttribute="top" secondItem="0n0-DA-hO2" secondAttribute="bottom" constant="52" id="TSn-VN-T9r"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leading" id="TTi-ib-qWU"/>
-                            <constraint firstItem="Rm1-UK-yYh" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" constant="93" id="XR6-uy-U8i"/>
-                            <constraint firstItem="0n0-DA-hO2" firstAttribute="top" secondItem="h0G-Ni-0pM" secondAttribute="bottom" constant="32" id="d7i-ew-nvj"/>
+                            <constraint firstItem="0n0-DA-hO2" firstAttribute="centerX" secondItem="h0G-Ni-0pM" secondAttribute="centerX" id="bxi-iV-eLL"/>
                             <constraint firstItem="h0G-Ni-0pM" firstAttribute="top" secondItem="dzG-ZD-vD9" secondAttribute="bottom" id="fN8-gN-ZrR"/>
-                            <constraint firstItem="h0G-Ni-0pM" firstAttribute="centerX" secondItem="0n0-DA-hO2" secondAttribute="centerX" id="hiC-xk-f4O"/>
-                            <constraint firstItem="Rm1-UK-yYh" firstAttribute="centerX" secondItem="0n0-DA-hO2" secondAttribute="centerX" id="ox6-4w-rHi"/>
-                            <constraint firstItem="0n0-DA-hO2" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" id="qdM-Vr-0o8"/>
+                            <constraint firstItem="Rm1-UK-yYh" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" constant="70" id="pVg-yd-cjb"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="centerX" secondItem="h0G-Ni-0pM" secondAttribute="centerX" id="qzE-GG-UOk"/>
+                            <constraint firstItem="0n0-DA-hO2" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" id="y0q-Zq-0gA"/>
                         </constraints>
                     </view>
                     <connections>
@@ -252,15 +262,6 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1V-Y3-087">
-                                        <rect key="frame" x="243" y="569" width="53" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Clear"/>
-                                        <connections>
-                                            <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NAS-rK-hRr"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Connections:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0U-gF-XQC">
                                         <rect key="frame" x="14" y="573" width="133" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -268,23 +269,34 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type message here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oB8-dM-wIy">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your message..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oB8-dM-wIy">
                                         <rect key="frame" x="14" y="536" width="346" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="sendMessage:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="oaZ-dC-mol"/>
+                                        </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jpw-Jb-L6J">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jpw-Jb-L6J">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="9Uv-P2-Ok8">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="toCell" rowHeight="86" id="Zv6-hC-TtD" customClass="ToMessageTableViewCell" customModule="mesh" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Uv-P2-Ok8" id="c0N-JU-PSI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zv6-hC-TtD" id="A4s-0C-EVY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fromCell" rowHeight="86" id="txw-Cb-nFl" customClass="FromMessageTableViewCell" customModule="mesh" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="114" width="375" height="86"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="txw-Cb-nFl" id="ms8-q6-l2C">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -294,13 +306,13 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="UKV-PX-TsO"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnG-vO-nXT">
-                                        <rect key="frame" x="304" y="568" width="56" height="25"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1V-Y3-087">
+                                        <rect key="frame" x="307" y="566" width="53" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Send"/>
+                                        <state key="normal" title="Clear"/>
                                         <connections>
-                                            <action selector="send" destination="BYZ-38-t0r" eventType="touchUpInside" id="yjj-RH-7YE"/>
+                                            <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NAS-rK-hRr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -314,24 +326,23 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="chatScrollView" destination="GQ3-xP-1kt" id="8jX-Z8-4BU"/>
-                        <outlet property="clearButton" destination="S1V-Y3-087" id="Pl7-6g-g9e"/>
-                        <outlet property="connectionsLabel" destination="J0U-gF-XQC" id="Eym-Kt-d5A"/>
+                        <outlet property="clearButton" destination="S1V-Y3-087" id="TVe-PK-WX9"/>
+                        <outlet property="connectionsLabel" destination="J0U-gF-XQC" id="nSj-va-1Gz"/>
                         <outlet property="navigationBar" destination="jQC-vL-SGb" id="KZq-fR-P4p"/>
-                        <outlet property="sendButton" destination="FnG-vO-nXT" id="U3z-Fr-fTr"/>
-                        <outlet property="tableView" destination="Jpw-Jb-L6J" id="PC1-Px-3ua"/>
-                        <outlet property="textField" destination="oB8-dM-wIy" id="LkJ-WH-nQg"/>
+                        <outlet property="scrollView" destination="GQ3-xP-1kt" id="Pbs-8O-eVM"/>
+                        <outlet property="tableView" destination="Jpw-Jb-L6J" id="DpN-55-6X8"/>
+                        <outlet property="textField" destination="oB8-dM-wIy" id="elz-le-CHA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="281" y="-57"/>
+            <point key="canvasLocation" x="280.80000000000001" y="-57.121439280359823"/>
         </scene>
     </scenes>
     <resources>
         <image name="centerpic.png" width="1600" height="1600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mtm-v5-6F1"/>
+        <segue reference="Z2q-dU-Obx"/>
     </inferredMetricsTieBreakers>
 </document>

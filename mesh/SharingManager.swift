@@ -15,35 +15,79 @@ class SharingManager {
     static let sharedInstance = SharingManager()
     var networkService = NetworkServiceManager()
     var meshDatabase = meshDB()
-    var messageList = [Message]()
-    var tagList = [Tag]()
     
     //update later to be user inputted
     var username = UIDevice.current.name
     
+    //information to be moved around
+    var messageDict = [String: [Message]]()
+    var unsentMessageDict = [String: [Message]]()
+    var tagList = [Tag]()
+    
+    var directConnections = [String]()
+    var indirectConnections = [String: [String]]()
+    var contactList = [String]()
+    
     init() {
         networkService.delegate = self
-        messageList = meshDatabase.getMessages()
+        messageDict = meshDatabase.getDeliveredMessages()
+        unsentMessageDict = meshDatabase.getUnsentMessages()
         tagList = meshDatabase.getTags()
     }
     
-    //devices connected to phone
-    var directConnections = [String]()
+    func sendMessage(id: Int, username: String, msg: String, contactName: String) {
+        let messageToSend = DataProcessor.getMessageToSend(id: id, sender: username, message: msg, receiver: contactName)
+        if contactName == "public" {
+            networkService.sendInformation(messageToSend, directConnections)
+        } else {
+            networkService.sendInformation(messageToSend, [contactName])
+            print("Step 4")
+        }
+    }
     
-    //Needs to be stored via SQLite later
-    var contactList = [String]()
+    func appendMessage(sent: Bool, contact: String, message: Message) {
+        if sent {
+            if unsentMessageDict[contact] != nil {
+                unsentMessageDict[contact]?.append(message)
+            } else {
+                unsentMessageDict[contact] = [message]
+            }
+        } else {
+            if messageDict[contact] != nil {
+                messageDict[contact]?.append(message)
+            } else {
+                messageDict[contact] = [message]
+            }
+        }
+    }
     
-    //stores all indirectly connected contacts
-    var indirectConnections = [String: [String]]()
-    
-    
-    func addMessage(username: String, msg: String, contactName: String) {
+    func addMessage(unsent: Bool, username: String, msg: String, contactName: String) {
         let tempID = Int(arc4random_uniform(100000))
-        let messageToSend = DataProcessor.getMessageToSend(id: tempID, sender: username, message: msg, receiver: contactName)
-        networkService.sendInformation(messageToSend, directConnections)
-        messageList.append(Message(id: tempID, sender: "me", message: msg, recipient: contactName))
-        meshDatabase.addMessage(id: tempID, name: "me", message: msg, recipient: contactName)
-        meshDatabase.clipMessageList(list: messageList)
+        let tempMessage = Message(id: tempID, sender: "me", message: msg, recipient: contactName)
+        
+        print("Step 2 + \(directConnections)")
+
+        //CHECK HERE!!!!!! - Never reached below
+        //must also check if in indirect connections later
+        if contactName == "public" || directConnections.contains(contactName){
+            //Step 1: send info
+            print("Step 3") //maybe have to update direct connection manually
+            sendMessage(id: tempID, username: username, msg: msg, contactName: contactName)
+            
+            //Step 2: save message to database
+            if(!unsent) {
+                meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
+            }
+        } else if contactList.contains(contactName) {
+            //Step 2: Stores as unsent message to be sent when contact reconnects
+            meshDatabase.addMessage(type: "unsentMessage", id: tempID, name: "me", message: msg, recipient: contactName)
+            print("Step 5")
+
+            appendMessage(sent: true, contact: contactName, message: tempMessage)
+        }
+        
+        //Step 3: add to local message list
+        appendMessage(sent: false, contact: contactName, message: tempMessage)
     }
     
     func addTag(title: String, description: String, latitude: Double, longitude: Double) {
@@ -53,8 +97,10 @@ class SharingManager {
         tagList.append(Tag(id: tempID, title: title, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), info: description))
         meshDatabase.addTag(id: tempID, name: title, specifics: description, long: longitude, lat: latitude)
     }
+
     
-    //maybe run this ina background thread when called!!!
+//NETWORK STUFF
+    //maybe run this in a background thread when called!!!
     func addIndirectContacts(contacts: String) {
         var list = DataProcessor.packageContacts(contacts: contacts)
         var count = 0
@@ -72,11 +118,61 @@ class SharingManager {
             count += 2
         }
     }
+    
+    //to be used by the network class
+    func addDirectConnection(name: String) {
+        directConnections.append(name)
+    }
+    
+    func removeDirectConnection(name: String) {
+        var i = 0
+        for element in directConnections {
+            if element == name {
+                directConnections.remove(at: i)
+            }
+            i += 1
+        }
+    }
+    
+    
+//getter functions
+    func getUsername() -> String {
+        return username
+    }
+    
+    func getdirectConnections() -> [String] {
+        return directConnections
+    }
+    
+    func getContactList() -> [String] {
+        return contactList
+    }
+    
+    func getTagList() -> [Tag] {
+        return tagList
+    }
+    
+    func getMessageDict() -> [String: [Message]] {
+        return messageDict
+    }
+    
+    func getUnsentMessageDict() -> [String: [Message]] {
+        return unsentMessageDict
+    }
+    
+    func getMessageList(name: String) -> [Message] {
+        let emptyArray = [Message]()
+        
+        if let list = messageDict[name] {
+            return list
+        } else {
+            return emptyArray
+        }
+    }
 }
 
 extension SharingManager : NetworkServiceManagerDelegate {
-    
-    //finds the names of the connected devices
+
     func connectedDevicesChanged(_ manager: NetworkServiceManager, connectedDevices: [String]) {
         OperationQueue.main.addOperation { () -> Void in
             self.directConnections = connectedDevices
@@ -87,33 +183,33 @@ extension SharingManager : NetworkServiceManagerDelegate {
     func updateData(_ manager: NetworkServiceManager, dataString: String) {
         OperationQueue.main.addOperation { () -> Void in
             let type = DataProcessor.checkDataType(data: dataString)
-            let tempConnected = SharingManager.sharedInstance.directConnections
             
             if type == "message" {
                 let tempMessage = DataProcessor.decomposeMessage(message: dataString)
-                
-                //if already have message then will not store it
-                if !(DataProcessor.checkMessagesEquality(message: tempMessage, messageList: self.messageList)) {
-                    if tempMessage.getRecipient() == self.username || tempMessage.getRecipient() == "public"{
-                        
-                        self.messageList.append(tempMessage)
-                        self.meshDatabase.addMessage(id: tempMessage.getID(), name: tempMessage.getSender(), message: tempMessage.getMessage(), recipient: tempMessage.getRecipient())
-                        self.meshDatabase.clipMessageList(list: self.messageList)
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MessageNotification"), object: nil, userInfo: nil)
-                    } else {
-                        //propagating message to other phones nearby
-                        self.networkService.sendInformation(dataString, tempConnected)
-                    }
+                let tempSender = tempMessage.getSender()
+                let tempRecipient = tempMessage.getRecipient()
+                if  tempRecipient == self.username || tempRecipient == "public"{
+                    
+                    self.appendMessage(sent: false, contact: tempSender, message: tempMessage)
+                    
+                    self.meshDatabase.addMessage(type: "message", id: tempMessage.getID(), name: tempMessage.getSender(), message: tempMessage.getMessage(), recipient: tempMessage.getRecipient())
+                    
+                    //Notifies view controller of new message
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MessageNotification"), object: nil, userInfo: nil)
+                } else {
+                    //propagating message to other phones nearby
+                    //self.networkService.sendInformation(dataString, tempConnected)
                 }
             } else if type == "tag" {
                 let tempTag = DataProcessor.decomposeTag(message: dataString)
+                
+                //prevents duplicates. Will have to optimize later maybe
                 if !(DataProcessor.checkTagsEquality(tag: tempTag, tagList: self.tagList)) {
                     self.meshDatabase.addTag(id: tempTag.getID(), name: tempTag.getTitle(), specifics: tempTag.getDescription(), long: tempTag.getLongitude(), lat: tempTag.getLatitude())
                     self.tagList.append(tempTag)
                 } else {
                     //propagating tag to other phones nearby
-                    self.networkService.sendInformation(dataString, tempConnected)
+                    //self.networkService.sendInformation(dataString, tempConnected)
                 }
             } else {
                 NSLog("%@", "No Data Received")

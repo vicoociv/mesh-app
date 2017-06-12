@@ -35,14 +35,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         mapView.showsScale = true
         addAllAnnotations()
-        
-//        DispatchQueue.global(qos: .background).async {
-//            print("This is run on the background queue")
-//            
-//            DispatchQueue.main.async {
-//                print("This is run on the main queue, after the previous code in outer block")
-//            }
-//        }
     }
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
