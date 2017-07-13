@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gLF-RO-dPJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gLF-RO-dPJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +44,7 @@
                                     <constraint firstAttribute="height" constant="50" id="0gL-tH-Yk9"/>
                                     <constraint firstAttribute="width" constant="50" id="93x-J9-TcJ"/>
                                 </constraints>
-                                <state key="normal" image="centerpic.png"/>
+                                <state key="normal" image="plus_button.png"/>
                                 <connections>
                                     <action selector="recenter" destination="Ni4-nv-3kU" eventType="touchUpInside" id="pla-mG-vzT"/>
                                 </connections>
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsK-SB-xTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-607.20000000000005" y="786.65667166416802"/>
+            <point key="canvasLocation" x="-1506" y="-57"/>
         </scene>
         <!--Channels View Controller-->
         <scene sceneID="JvL-LY-iwp">
@@ -119,14 +119,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0n0-DA-hO2">
-                                <rect key="frame" x="16" y="107" width="343" height="508"/>
+                                <rect key="frame" x="16" y="123" width="343" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell1" rowHeight="54" id="lit-vD-4uX" customClass="ContactsTableViewCell" customModule="mesh" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lit-vD-4uX" id="rHF-kO-fqM">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCs-tc-cZo">
@@ -166,22 +166,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <segmentedControl autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-Ni-0pM">
-                                <rect key="frame" x="0.0" y="64" width="375" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Ndr-fD-ISe"/>
-                                    <constraint firstAttribute="width" constant="375" id="Vea-2y-Vw8"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Contacts"/>
-                                    <segment title="Discover"/>
-                                    <segment title="Public"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="listChange:" destination="gLF-RO-dPJ" eventType="valueChanged" id="r3G-pC-KFg"/>
-                                </connections>
-                            </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-UK-yYh">
                                 <rect key="frame" x="86" y="612" width="191" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -198,6 +182,22 @@
                                     <segue destination="Ni4-nv-3kU" kind="show" identifier="showMapView" id="2bN-Cv-rgH"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-Ni-0pM">
+                                <rect key="frame" x="16" y="80" width="343" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Ndr-fD-ISe"/>
+                                    <constraint firstAttribute="width" constant="343" id="Vea-2y-Vw8"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Contacts"/>
+                                    <segment title="Discover"/>
+                                    <segment title="Public"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="listChange:" destination="gLF-RO-dPJ" eventType="valueChanged" id="r3G-pC-KFg"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -206,11 +206,11 @@
                             <constraint firstAttribute="bottom" secondItem="Rm1-UK-yYh" secondAttribute="bottom" constant="20" symbolic="YES" id="7aB-8g-XVe"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="top" secondItem="OuR-NN-5cY" secondAttribute="bottom" id="Eow-dU-Tmx"/>
                             <constraint firstAttribute="trailing" secondItem="dzG-ZD-vD9" secondAttribute="trailing" id="HeP-wk-toG"/>
-                            <constraint firstItem="h0G-Ni-0pM" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" constant="-16" id="LW7-wn-JcQ"/>
+                            <constraint firstItem="h0G-Ni-0pM" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" id="LW7-wn-JcQ"/>
                             <constraint firstItem="L01-fd-Fhg" firstAttribute="top" secondItem="0n0-DA-hO2" secondAttribute="bottom" constant="52" id="TSn-VN-T9r"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leading" id="TTi-ib-qWU"/>
                             <constraint firstItem="0n0-DA-hO2" firstAttribute="centerX" secondItem="h0G-Ni-0pM" secondAttribute="centerX" id="bxi-iV-eLL"/>
-                            <constraint firstItem="h0G-Ni-0pM" firstAttribute="top" secondItem="dzG-ZD-vD9" secondAttribute="bottom" id="fN8-gN-ZrR"/>
+                            <constraint firstItem="h0G-Ni-0pM" firstAttribute="top" secondItem="dzG-ZD-vD9" secondAttribute="bottom" constant="16" id="fN8-gN-ZrR"/>
                             <constraint firstItem="Rm1-UK-yYh" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" constant="70" id="pVg-yd-cjb"/>
                             <constraint firstItem="dzG-ZD-vD9" firstAttribute="centerX" secondItem="h0G-Ni-0pM" secondAttribute="centerX" id="qzE-GG-UOk"/>
                             <constraint firstItem="0n0-DA-hO2" firstAttribute="leading" secondItem="4AP-IC-vcO" secondAttribute="leadingMargin" id="y0q-Zq-0gA"/>
@@ -340,9 +340,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="centerpic.png" width="1600" height="1600"/>
+        <image name="plus_button.png" width="720" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Z2q-dU-Obx"/>
+        <segue reference="mtm-v5-6F1"/>
     </inferredMetricsTieBreakers>
 </document>

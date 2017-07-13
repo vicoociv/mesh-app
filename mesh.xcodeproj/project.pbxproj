@@ -26,7 +26,6 @@
 		57391A7C1EAAEFAF00773FFF /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57391A7B1EAAEFAF00773FFF /* SharedData.swift */; };
 		5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */; };
 		575051901E1F320B0066550F /* Assets 3.38.11 AM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */; };
-		575F52F01ECA426E006BEA27 /* centerpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 575F52EF1ECA426E006BEA27 /* centerpic.png */; };
 		577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */; };
 		5785F5C91E98BA640094B5F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5785F5C81E98BA640094B5F7 /* MapKit.framework */; };
 		57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57872E8D1E331D54009E5F4C /* DataProcessor.swift */; };
@@ -129,7 +128,6 @@
 		57391A7B1EAAEFAF00773FFF /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 		5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets 3.38.11 AM.xcassets"; path = "../../Assets 3.38.11 AM.xcassets"; sourceTree = "<group>"; };
-		575F52EF1ECA426E006BEA27 /* centerpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centerpic.png; path = ../../centerpic.png; sourceTree = "<group>"; };
 		57726EA01E616AFF0028CE3D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToMessageTableViewCell.swift; sourceTree = "<group>"; };
 		5785F5C81E98BA640094B5F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -211,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */,
-				575F52EF1ECA426E006BEA27 /* centerpic.png */,
 				571896B61E52E16600FE2934 /* plus_button.png */,
 			);
 			name = Icons;
@@ -412,7 +409,6 @@
 				570643631DEB88B9008A033A /* LaunchScreen.storyboard in Resources */,
 				571896B71E52E16600FE2934 /* plus_button.png in Resources */,
 				5706435E1DEB88B9008A033A /* Main.storyboard in Resources */,
-				575F52F01ECA426E006BEA27 /* centerpic.png in Resources */,
 				575051901E1F320B0066550F /* Assets 3.38.11 AM.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
