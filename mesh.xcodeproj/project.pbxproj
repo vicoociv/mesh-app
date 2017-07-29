@@ -26,6 +26,11 @@
 		57391A7C1EAAEFAF00773FFF /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57391A7B1EAAEFAF00773FFF /* SharedData.swift */; };
 		5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */; };
 		575051901E1F320B0066550F /* Assets 3.38.11 AM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */; };
+		57555AAF1F2C67570006290D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AAE1F2C67570006290D /* ChatViewController.swift */; };
+		57555ABA1F2C68920006290D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AB81F2C68920006290D /* Extensions.swift */; };
+		57555ABB1F2C68920006290D /* WidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AB91F2C68920006290D /* WidgetModule.swift */; };
+		57555ABD1F2C6C920006290D /* ConstraintHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555ABC1F2C6C920006290D /* ConstraintHandler.swift */; };
+		57555ABF1F2C6CC70006290D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555ABE1F2C6CC70006290D /* TextView.swift */; };
 		577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */; };
 		5785F5C91E98BA640094B5F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5785F5C81E98BA640094B5F7 /* MapKit.framework */; };
 		57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57872E8D1E331D54009E5F4C /* DataProcessor.swift */; };
@@ -128,6 +133,11 @@
 		57391A7B1EAAEFAF00773FFF /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 		5750518F1E1F320B0066550F /* Assets 3.38.11 AM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets 3.38.11 AM.xcassets"; path = "../../Assets 3.38.11 AM.xcassets"; sourceTree = "<group>"; };
+		57555AAE1F2C67570006290D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		57555AB81F2C68920006290D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		57555AB91F2C68920006290D /* WidgetModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetModule.swift; sourceTree = "<group>"; };
+		57555ABC1F2C6C920006290D /* ConstraintHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintHandler.swift; sourceTree = "<group>"; };
+		57555ABE1F2C6CC70006290D /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		57726EA01E616AFF0028CE3D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToMessageTableViewCell.swift; sourceTree = "<group>"; };
 		5785F5C81E98BA640094B5F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -230,6 +240,7 @@
 				57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */,
 				57117BF91E45A3DE001018D7 /* MapViewController.swift */,
 				57DE5B461EB2AE700055A67E /* PaddedLabel.swift */,
+				57555AAE1F2C67570006290D /* ChatViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -247,12 +258,8 @@
 		571896C41E53E97C00FE2934 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				5706436C1DEB8993008A033A /* NetworkServiceManager.swift */,
-				57ADC1351E16065A003645BB /* SharingManager.swift */,
-				5711ED481E28960C0053F00B /* meshDB.swift */,
-				57872E8D1E331D54009E5F4C /* DataProcessor.swift */,
-				57391A7B1EAAEFAF00773FFF /* SharedData.swift */,
-				570A749C1EAD190B00BE6FC0 /* Constraints.swift */,
+				57555AC11F2C6CE50006290D /* Other */,
+				57555AC01F2C6CD20006290D /* UI */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -264,6 +271,30 @@
 				570643641DEB88B9008A033A /* Info.plist */,
 			);
 			name = Managerial;
+			sourceTree = "<group>";
+		};
+		57555AC01F2C6CD20006290D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				57555ABE1F2C6CC70006290D /* TextView.swift */,
+				57555ABC1F2C6C920006290D /* ConstraintHandler.swift */,
+				57555AB81F2C68920006290D /* Extensions.swift */,
+				57555AB91F2C68920006290D /* WidgetModule.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		57555AC11F2C6CE50006290D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				5706436C1DEB8993008A033A /* NetworkServiceManager.swift */,
+				57ADC1351E16065A003645BB /* SharingManager.swift */,
+				5711ED481E28960C0053F00B /* meshDB.swift */,
+				57872E8D1E331D54009E5F4C /* DataProcessor.swift */,
+				57391A7B1EAAEFAF00773FFF /* SharedData.swift */,
+				570A749C1EAD190B00BE6FC0 /* Constraints.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		57FF8E381E27D59A00A307B4 /* Frameworks */ = {
@@ -421,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */,
+				57555ABD1F2C6C920006290D /* ConstraintHandler.swift in Sources */,
 				57ADC1301E14E76B003645BB /* ChannelsViewController.swift in Sources */,
 				5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */,
 				57391A7C1EAAEFAF00773FFF /* SharedData.swift in Sources */,
@@ -431,12 +463,16 @@
 				57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */,
 				5706435B1DEB88B9008A033A /* ViewController.swift in Sources */,
 				57ADC1361E16065A003645BB /* SharingManager.swift in Sources */,
+				57555AAF1F2C67570006290D /* ChatViewController.swift in Sources */,
 				577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */,
 				57ADC1321E14E935003645BB /* ContactsTableViewCell.swift in Sources */,
 				570643591DEB88B9008A033A /* AppDelegate.swift in Sources */,
+				57555ABA1F2C68920006290D /* Extensions.swift in Sources */,
 				5711ED471E288D840053F00B /* Message.swift in Sources */,
 				571896B91E52E44700FE2934 /* Tag.swift in Sources */,
 				57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */,
+				57555ABF1F2C6CC70006290D /* TextView.swift in Sources */,
+				57555ABB1F2C68920006290D /* WidgetModule.swift in Sources */,
 				5706436D1DEB8993008A033A /* NetworkServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

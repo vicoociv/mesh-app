@@ -126,7 +126,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lit-vD-4uX" id="rHF-kO-fqM">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCs-tc-cZo">
@@ -336,13 +336,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280.80000000000001" y="-57.121439280359823"/>
+            <point key="canvasLocation" x="418" y="-57"/>
         </scene>
     </scenes>
     <resources>
         <image name="plus_button.png" width="720" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mtm-v5-6F1"/>
+        <segue reference="Z2q-dU-Obx"/>
     </inferredMetricsTieBreakers>
 </document>
