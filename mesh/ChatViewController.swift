@@ -10,8 +10,8 @@ import UIKit
 
 class ChatViewController: UIViewController, UITextViewDelegate {
     
-    var contactName = "Public Chat"
-    var username = "public"
+    var contactName: String!
+    var username: String!
     var chatType = chatStatus.Public
 
     internal var index: IndexPath!
@@ -24,9 +24,28 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         case Direct
     }
     
+    var screenTitle: Label = {
+        let label = Label()
+        label.font = UIFont(name: "Helvetica Neue", size: 18)
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        return label
+    }()
+    
     var navigationBar: View = {
         let view = View()
-        view.backgroundColor = UIColor.ultraLightGray
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.alpha = 0.95
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        let shadow = View()
+        shadow.backgroundColor = UIColor.gray
+        shadow.frame = CGRect(x: 0, y: 69.3, width: UIScreen.main.bounds.width, height: 0.7)
+        view.addSubview(shadow)
+        
         return view
     }()
     
@@ -44,7 +63,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         field.delegate = self
         field.expandable = true
         field.backgroundColor = UIColor.clear
-        field.layer.borderColor = UIColor.purpleNeon.cgColor
+        field.layer.borderColor = UIColor.meshOrange.cgColor
         field.setPlaceholder(placeholder: "Send a message...", alignment: "left")
         return field
     }()
@@ -54,6 +73,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
+        blurEffectView.alpha = 0.95
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
         
@@ -69,7 +89,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         let button = Button()
         button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         let image = UIImage(named: "sendArrow.png")
-        button.setImage(image, for: .normal)
+        button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
         return button
     }()
     
@@ -100,7 +120,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         let button = Button()
         button.addTarget(self, action: #selector(clear), for: .touchUpInside)
         let image = UIImage(named: "paperclip.png")
-        button.setImage(image, for: .normal)
+        button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
         return button
     }()
     
@@ -137,30 +157,38 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         expandTextView(false)
         shiftViewUp(false)
         
+        navigationBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        navigationBar.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        screenTitle.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -20).isActive = true
+        screenTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        screenTitle.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 16).isActive = true
+        screenTitle.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -16).isActive = true
+        
         textViewBackground.topAnchor.constraint(equalTo: textView.topAnchor, constant: -10).isActive = true
         textViewBackground.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: 15).isActive = true
-        textViewBackground.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        textViewBackground.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        textViewBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        textViewBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         sendButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         sendButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
         sendButton.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 5).isActive = true
-        sendButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5).isActive = true
+        sendButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         
         attachmentButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         attachmentButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
-        attachmentButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 7).isActive = true
+        attachmentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7).isActive = true
         attachmentButton.trailingAnchor.constraint(equalTo: textView.leadingAnchor, constant: -5).isActive = true
         
-        constraintHandler.getConstraint(object: "tableView", type: "top").isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: textViewBackground.bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     internal func setupDynamicConstraints() {
-        //top anchor overriden by Anonymous Chat View Controller
-        constraintHandler.addConstraint(object: "tableView", type: "top", constraint: tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120))
         constraintHandler.addConstraint(object: "textView", type: "height", constraint: textView.heightAnchor.constraint(equalToConstant: 30.5))
         constraintHandler.addConstraint(object: "textView", type: "bottomUp", constraint: textView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -(216 + 10)))
         constraintHandler.addConstraint(object: "textView", type: "bottomDown", constraint: textView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10))
@@ -172,6 +200,8 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     
     internal func setupView() {
         view.addSubview(tableView)
+        view.addSubview(navigationBar)
+        view.addSubview(screenTitle)
         view.addSubview(textViewBackground)
         view.addSubview(textView)
         view.addSubview(sendButton)
@@ -189,7 +219,13 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         updateMessageList()
         username = SharingManager.sharedInstance.username
+        screenTitle.text = contactName
         setupView()
+        
+        //removing keyboard on tap
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         NotificationCenter.default.addObserver(forName:Notification.Name(rawValue:"MessageNotification"), object:nil, queue:nil) {
             notification in
             self.updateMessageList()
@@ -210,6 +246,10 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         
         sendButton.isHidden = true
         attachmentButton.isHidden = true
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     //updates the infoList by filtering main messageList in Sharing Manager
@@ -295,27 +335,29 @@ class ChatViewController: UIViewController, UITextViewDelegate {
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == messageList.count {
-            return 60.0
+        let tempIndex = indexPath.row
+        if tempIndex == 0 {
+            return 60
+        } else if tempIndex == messageList.count + 1{
+            return 70
         } else {
             return UITableViewAutomaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messageList.count + 1
+        return self.messageList.count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.index = indexPath
-        
-        if indexPath.row == messageList.count {
+        let tempIndex = indexPath.row
+        if tempIndex == 0 || tempIndex == messageList.count + 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "spacerCell", for: indexPath)
             return cell
         }
         
-        let tempMessage = self.messageList[indexPath.row]
-        
+        let tempMessage = self.messageList[tempIndex - 1]
         if tempMessage.getSender() == "me" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "toCell", for: indexPath) as! ToMessageTableViewCell
             cell.messageText.text = tempMessage.getMessage()

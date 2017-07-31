@@ -15,6 +15,7 @@ extension UIColor {
     static let mediumGray = UIColor(red: 240/255, green: 236/255, blue: 233/255, alpha: 1.0)
     static let translucentWhite = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.4)
     static let translucentWhiteStrong = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.8)
+    static let meshOrange = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 0.8)
 }
 
 extension CAGradientLayer{

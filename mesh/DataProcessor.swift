@@ -62,8 +62,6 @@ class DataProcessor {
     
 
 //Tags
-    
-    //makes Tag object
     static func decomposeTag(message: String) -> Tag {
         var list = message.components(separatedBy: separator)
         let tempID = Int(list[1])
@@ -91,7 +89,6 @@ class DataProcessor {
     
 
 //Indirect Contact Adding
-    
     static func packageContacts(contacts: [String], name: String) -> String{
         var result = "contacts\(separator)"
         

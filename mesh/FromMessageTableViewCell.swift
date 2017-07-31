@@ -21,48 +21,65 @@ class FromMessageTableViewCell: UITableViewCell {
         return label
     }()
     
-    var contactBubble: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layoutIfNeeded()
-        button.layer.masksToBounds = true
+    var contactBubble: Button = {
+        let button = Button()
+        button.layer.cornerRadius = 20
         return button
     }()
     
-    var messageText: PaddedLabel = {
-        let label = PaddedLabel()
+    var messageText: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.lineBreakMode = .byCharWrapping
-        label.backgroundColor = UIColor(red: 240/255, green: 236/255, blue: 233/255, alpha: 1.0)
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 15
+        label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textColor = UIColor.black
         return label
     }()
     
-    func setupFromView() {
-        messageText.textColor = UIColor.black
+    var textBubble: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = true
+        view.backgroundColor = UIColor.mediumGray
+        view.layer.cornerRadius = 17
+        view.alpha = 0.8
+        return view
+    }()
+    
+    private func setupView() {
         contactBubble.backgroundColor = UIColor.lightGray
+        addSubview(textBubble)
         addSubview(messageText)
         addSubview(nameLabel)
         addSubview(contactBubble)
         
-        contactBubble.frame = CGRect(x: contactBubble.frame.origin.x, y: contactBubble.frame.origin.y, width: 100, height: 100)
-        contactBubble.layer.cornerRadius = 25
+        messageText.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        messageText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        messageText.leadingAnchor.constraint(equalTo: contactBubble.trailingAnchor, constant: 20).isActive = true
+        messageText.widthAnchor.constraint(lessThanOrEqualToConstant: 2 * screenWidth/3).isActive = true
         
-        self.addConstraints(messageText.constrainSidesView(indicator: false, to: self, top: 10, bottom: 20, right: -60, left: 60))
-        self.addConstraint(messageText.constrainWidth(to: self, constant: screenWidth/3))
-        self.addConstraints(contactBubble.constrainSidesView(indicator: false, to: self, top: 20, bottom: -60, right: -60, left: 15))
-        self.addConstraints(nameLabel.constrainSidesView(indicator: false, to: self, top: -60, bottom: 0, right: -60, left: 65))
+        textBubble.topAnchor.constraint(equalTo: messageText.topAnchor, constant: -8).isActive = true
+        textBubble.bottomAnchor.constraint(equalTo: messageText.bottomAnchor, constant: 8).isActive = true
+        textBubble.leadingAnchor.constraint(equalTo: messageText.leadingAnchor, constant: -12).isActive = true
+        textBubble.trailingAnchor.constraint(equalTo: messageText.trailingAnchor, constant: 12).isActive = true
+        textBubble.widthAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
+        
+        nameLabel.topAnchor.constraint(equalTo: textBubble.bottomAnchor).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: textBubble.leadingAnchor, constant: 7).isActive = true
+        
+        contactBubble.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        contactBubble.bottomAnchor.constraint(equalTo: messageText.bottomAnchor).isActive = true
+        contactBubble.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        contactBubble.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupFromView()
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:)")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
     }
-    
 }

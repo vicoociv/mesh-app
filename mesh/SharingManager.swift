@@ -33,6 +33,13 @@ class SharingManager {
         messageDict = meshDatabase.getDeliveredMessages()
         unsentMessageDict = meshDatabase.getUnsentMessages()
         tagList = meshDatabase.getTags()
+        generateContacts()
+    }
+    
+    private func generateContacts() {
+        for i in 0...20 {
+            contactList.append("Victor Chien \(i)")
+        }
     }
     
     func sendMessage(id: Int, username: String, msg: String, contactName: String) {
@@ -70,23 +77,14 @@ class SharingManager {
         //CHECK HERE!!!!!! - Never reached below
         //must also check if in indirect connections later
         if contactName == "public" || directConnections.contains(contactName){
-            //Step 1: send info
-            print("Step 3") //maybe have to update direct connection manually
             sendMessage(id: tempID, username: username, msg: msg, contactName: contactName)
-            
-            //Step 2: save message to database
             if(!unsent) {
                 meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
             }
         } else if contactList.contains(contactName) {
-            //Step 2: Stores as unsent message to be sent when contact reconnects
             meshDatabase.addMessage(type: "unsentMessage", id: tempID, name: "me", message: msg, recipient: contactName)
-            print("Step 5")
-
             appendMessage(sent: true, contact: contactName, message: tempMessage)
         }
-        
-        //Step 3: add to local message list
         appendMessage(sent: false, contact: contactName, message: tempMessage)
     }
     
