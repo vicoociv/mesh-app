@@ -9,33 +9,11 @@
 import UIKit
 
 extension UIColor {
-    static let pinkNeon = UIColor(red: 241/255.0, green: 81/255.0, blue: 188/255.0, alpha: 1)
-    static let purpleNeon = UIColor(red: 112/255.0, green: 48/255.0, blue: 160/255.0, alpha: 1)
     static let ultraLightGray = UIColor(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
     static let mediumGray = UIColor(red: 240/255, green: 236/255, blue: 233/255, alpha: 1.0)
     static let translucentWhite = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.4)
     static let translucentWhiteStrong = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.8)
-    static let meshOrange = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 0.8)
-}
-
-extension CAGradientLayer{
-    func neonGradient() -> CAGradientLayer{
-        let topColor = UIColor.pinkNeon
-        let bottomColor = UIColor.purpleNeon
-        
-        let gradientColors: [CGColor] = [topColor.cgColor, bottomColor.cgColor]
-        let gradientLocations: [Float] = [0.2, 0.9] //controls the position of the gradient. X and Y
-        let start = CGPoint(x: 1, y: 0)
-        let end = CGPoint(x: 0, y: 1)
-        
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors
-        gradientLayer.locations = gradientLocations as [NSNumber]?
-        gradientLayer.startPoint = start
-        gradientLayer.endPoint = end
-        
-        return gradientLayer
-    }
+    static let meshOrange = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 1)
 }
 
 extension UIImage {

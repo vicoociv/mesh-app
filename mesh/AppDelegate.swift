@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,22 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        //google maps api key
+        GMSServices.provideAPIKey("AIzaSyDmOBKXhmyjPJbRlYXaeX2rwMyWSmtmE6k")
         return true
-
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        //set initial view controller depending on whether location access is granted
-//        if CLLocationManager.locationServicesEnabled() {
-//            switch(CLLocationManager.authorizationStatus()) {
-//            case .notDetermined, .restricted, .denied:
-//                setRootViewController(name: "LaunchViewController")
-//            case .authorizedAlways, .authorizedWhenInUse:
-//                setRootViewController(name: "MapViewController")
-//            }
-//        } else {
-//            setRootViewController(name: "LaunchViewController")
-//            print("Location services are not enabled")
-//        }
     }
     
 //    //sets the root view controller

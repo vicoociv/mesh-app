@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreLocation
 
-
 class SharingManager {
     static let sharedInstance = SharingManager()
     var networkService = NetworkServiceManager()
@@ -48,7 +47,6 @@ class SharingManager {
             networkService.sendInformation(messageToSend, directConnections)
         } else {
             networkService.sendInformation(messageToSend, [contactName])
-            print("Step 4")
         }
     }
     
@@ -72,20 +70,18 @@ class SharingManager {
         let tempID = Int(arc4random_uniform(100000))
         let tempMessage = Message(id: tempID, sender: "me", message: msg, recipient: contactName)
         
-        print("Step 2 + \(directConnections)")
-
-        //CHECK HERE!!!!!! - Never reached below
-        //must also check if in indirect connections later
         if contactName == "public" || directConnections.contains(contactName){
             sendMessage(id: tempID, username: username, msg: msg, contactName: contactName)
             if(!unsent) {
                 meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
             }
         } else if contactList.contains(contactName) {
-            meshDatabase.addMessage(type: "unsentMessage", id: tempID, name: "me", message: msg, recipient: contactName)
+            meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
             appendMessage(sent: true, contact: contactName, message: tempMessage)
+        } else {
+            meshDatabase.addMessage(type: "unsentMessage", id: tempID, name: "me", message: msg, recipient: contactName)
+            appendMessage(sent: false, contact: contactName, message: tempMessage)
         }
-        appendMessage(sent: false, contact: contactName, message: tempMessage)
     }
     
     func addTag(title: String, description: String, latitude: Double, longitude: Double) {

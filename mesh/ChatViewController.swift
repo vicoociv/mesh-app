@@ -63,7 +63,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         field.delegate = self
         field.expandable = true
         field.backgroundColor = UIColor.clear
-        field.layer.borderColor = UIColor.meshOrange.cgColor
+        field.layer.borderColor = UIColor.gray.cgColor
         field.setPlaceholder(placeholder: "Send a message...", alignment: "left")
         return field
     }()
@@ -96,7 +96,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     @objc private func sendMessage() {
         let message = textView.text
         
-        //makes sure the user isn't just inputting a ton of white spaces and new lines only
+        //deletes white spaces and new lines
         let trimmedMessage = message?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if trimmedMessage != "" {
             if chatType == .Direct {

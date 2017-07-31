@@ -126,7 +126,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lit-vD-4uX" id="rHF-kO-fqM">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCs-tc-cZo">
@@ -246,7 +246,7 @@
         <!--Item 2-->
         <scene sceneID="wPM-xn-JuF">
             <objects>
-                <viewController id="Z3n-Ty-wLT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map2ViewController" id="Z3n-Ty-wLT" customClass="Map2ViewController" customModule="mesh" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wUw-ry-egz"/>
                         <viewControllerLayoutGuide type="bottom" id="fqa-3Z-118"/>
@@ -382,7 +382,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zv6-hC-TtD" id="A4s-0C-EVY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -390,7 +390,7 @@
                                                 <rect key="frame" x="0.0" y="114" width="375" height="86"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="txw-Cb-nFl" id="ms8-q6-l2C">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
