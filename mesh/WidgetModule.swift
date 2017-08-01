@@ -18,7 +18,7 @@ class TabBar: UISegmentedControl {
     override init(items: [Any]?) {
         super.init(items: items)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.tintColor = UIColor.purpleNeon
+        self.tintColor = UIColor.meshOrange
         self.backgroundColor = UIColor.clear
         let font = UIFont.systemFont(ofSize: 12)
         self.setTitleTextAttributes([NSFontAttributeName: font],

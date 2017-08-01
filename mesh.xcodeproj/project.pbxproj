@@ -39,12 +39,15 @@
 		573A48121F2FBCED00F6CD27 /* checkBoxOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 573A480F1F2FBCED00F6CD27 /* checkBoxOn.png */; };
 		573A48131F2FBCED00F6CD27 /* checkBoxOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 573A48101F2FBCED00F6CD27 /* checkBoxOff.png */; };
 		573A48141F2FBCED00F6CD27 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573A48111F2FBCED00F6CD27 /* CheckBox.swift */; };
+		5750288D1F301C83002F98D2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5750288C1F301C83002F98D2 /* GoogleMaps.bundle */; };
 		57555AAF1F2C67570006290D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AAE1F2C67570006290D /* ChatViewController.swift */; };
 		57555ABA1F2C68920006290D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AB81F2C68920006290D /* Extensions.swift */; };
 		57555ABB1F2C68920006290D /* WidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555AB91F2C68920006290D /* WidgetModule.swift */; };
 		57555ABF1F2C6CC70006290D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57555ABE1F2C6CC70006290D /* TextView.swift */; };
 		577CD31C1EA1F34A006C770C /* ToMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */; };
 		57872E8E1E331D54009E5F4C /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57872E8D1E331D54009E5F4C /* DataProcessor.swift */; };
+		57A5103A1F30216400BC5FC5 /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A510381F30216400BC5FC5 /* GooglePlacePicker.framework */; };
+		57A5103B1F30216400BC5FC5 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A510391F30216400BC5FC5 /* GooglePlaces.framework */; };
 		57ADC1301E14E76B003645BB /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */; };
 		57ADC1321E14E935003645BB /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */; };
 		57ADC1361E16065A003645BB /* SharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1351E16065A003645BB /* SharingManager.swift */; };
@@ -174,6 +177,7 @@
 		573A480F1F2FBCED00F6CD27 /* checkBoxOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBoxOn.png; sourceTree = "<group>"; };
 		573A48101F2FBCED00F6CD27 /* checkBoxOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBoxOff.png; sourceTree = "<group>"; };
 		573A48111F2FBCED00F6CD27 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		5750288C1F301C83002F98D2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		57555AAE1F2C67570006290D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		57555AB81F2C68920006290D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57555AB91F2C68920006290D /* WidgetModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetModule.swift; sourceTree = "<group>"; };
@@ -182,6 +186,8 @@
 		577CD31B1EA1F34A006C770C /* ToMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToMessageTableViewCell.swift; sourceTree = "<group>"; };
 		5785F5C81E98BA640094B5F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		57872E8D1E331D54009E5F4C /* DataProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProcessor.swift; sourceTree = "<group>"; };
+		57A510381F30216400BC5FC5 /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlacePicker.framework; sourceTree = "<group>"; };
+		57A510391F30216400BC5FC5 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
 		57ADC12F1E14E76B003645BB /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		57ADC1351E16065A003645BB /* SharingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingManager.swift; sourceTree = "<group>"; };
@@ -212,6 +218,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57A5103A1F30216400BC5FC5 /* GooglePlacePicker.framework in Frameworks */,
+				57A5103B1F30216400BC5FC5 /* GooglePlaces.framework in Frameworks */,
 				57DABE251F2FD67B00A29716 /* CoreText.framework in Frameworks */,
 				57DABE261F2FD67B00A29716 /* GLKit.framework in Frameworks */,
 				57DABE271F2FD67B00A29716 /* ImageIO.framework in Frameworks */,
@@ -349,9 +357,9 @@
 			children = (
 				57DABE131F2FD5BD00A29716 /* Frameworks */,
 				57117BF91E45A3DE001018D7 /* MapViewController.swift */,
+				57DABDFF1F2FCF9B00A29716 /* Map2ViewController.swift */,
 				57117C031E45A655001018D7 /* CustomAnnotation.swift */,
 				5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */,
-				57DABDFF1F2FCF9B00A29716 /* Map2ViewController.swift */,
 			);
 			name = MapViewController;
 			sourceTree = "<group>";
@@ -417,6 +425,9 @@
 		57DABE131F2FD5BD00A29716 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57A510381F30216400BC5FC5 /* GooglePlacePicker.framework */,
+				57A510391F30216400BC5FC5 /* GooglePlaces.framework */,
+				5750288C1F301C83002F98D2 /* GoogleMaps.bundle */,
 				57DABE0D1F2FD5B000A29716 /* GoogleMapsBase.framework */,
 				57DABE0E1F2FD5B000A29716 /* GoogleMaps.framework */,
 				57DABE0F1F2FD5B000A29716 /* GoogleMapsCore.framework */,
@@ -576,6 +587,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5750288D1F301C83002F98D2 /* GoogleMaps.bundle in Resources */,
 				573A47FB1F2F0B0B00F6CD27 /* paperclip.png in Resources */,
 				573A47F91F2F0B0B00F6CD27 /* arrowIcon.png in Resources */,
 				573A479D1F2F018A00F6CD27 /* Assets 3.38.11 AM.xcassets in Resources */,
