@@ -19,7 +19,7 @@ class SharingManager {
     var username = UIDevice.current.name
     
     //information to be moved around
-    var messageDict = [String: [Message]]()
+    var messageDict = [String: [Message]]() //maybe hold sent and unsent messages together
     var unsentMessageDict = [String: [Message]]()
     var tagList = [Tag]()
     
@@ -41,55 +41,57 @@ class SharingManager {
         }
     }
     
-    func sendMessage(id: Int, username: String, msg: String, contactName: String) {
-        let messageToSend = DataProcessor.getMessageToSend(id: id, sender: username, message: msg, receiver: contactName)
-        if contactName == "public" {
+    func sendMessage(message: Message) {
+        let messageToSend = DataProcessor.getMessageToSend(message: message)
+        if message.getRecipient() == "public" {
             networkService.sendInformation(messageToSend, directConnections)
         } else {
-            networkService.sendInformation(messageToSend, [contactName])
+            networkService.sendInformation(messageToSend, [message.getRecipient()])
         }
     }
     
     func appendMessage(sent: Bool, contact: String, message: Message) {
-        if sent {
+        if !sent {
             if unsentMessageDict[contact] != nil {
                 unsentMessageDict[contact]?.append(message)
             } else {
                 unsentMessageDict[contact] = [message]
             }
+        }
+        if messageDict[contact] != nil {
+            messageDict[contact]?.append(message)
         } else {
-            if messageDict[contact] != nil {
-                messageDict[contact]?.append(message)
-            } else {
-                messageDict[contact] = [message]
-            }
+            messageDict[contact] = [message]
         }
     }
-    
-    func addMessage(unsent: Bool, username: String, msg: String, contactName: String) {
+        func addMessage(sent: Bool, username: String, msg: String, contactName: String) {
         let tempID = Int(arc4random_uniform(100000))
-        let tempMessage = Message(id: tempID, sender: "me", message: msg, recipient: contactName)
+        let tempMessage = Message(sent: sent, id: tempID, sender: username, message: msg, recipient: contactName)
         
         if contactName == "public" || directConnections.contains(contactName){
-            sendMessage(id: tempID, username: username, msg: msg, contactName: contactName)
-            if(!unsent) {
-                meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
+            sendMessage(message: tempMessage)
+            appendMessage(sent: true, contact: contactName, message: tempMessage)
+            if(!sent) {
+                meshDatabase.addMessage(type: "unsentMessage", message: tempMessage)
+            } else {
+                meshDatabase.addMessage(type: "message", message: tempMessage)
             }
         } else if contactList.contains(contactName) {
-            meshDatabase.addMessage(type: "message", id: tempID, name: "me", message: msg, recipient: contactName)
-            appendMessage(sent: true, contact: contactName, message: tempMessage)
+            meshDatabase.addMessage(type: "message", message: tempMessage)
+            appendMessage(sent: false, contact: contactName, message: tempMessage)
         } else {
-            meshDatabase.addMessage(type: "unsentMessage", id: tempID, name: "me", message: msg, recipient: contactName)
+            meshDatabase.addMessage(type: "unsentMessage", message: tempMessage)
             appendMessage(sent: false, contact: contactName, message: tempMessage)
         }
     }
     
     func addTag(title: String, description: String, latitude: Double, longitude: Double) {
         let tempID = Int(arc4random_uniform(100000))
-        let tagToSend = DataProcessor.getTagToSend(id: tempID, title: title, description: description, latitude: latitude, longitude: longitude)
+        let tempTag = Tag(id: tempID, title: title, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), info: description)
+        let tagToSend = DataProcessor.getTagToSend(id: tempID, tag: tempTag)
         networkService.sendInformation(tagToSend, directConnections)
-        tagList.append(Tag(id: tempID, title: title, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), info: description))
-        meshDatabase.addTag(id: tempID, name: title, specifics: description, long: longitude, lat: latitude)
+        tagList.append(tempTag)
+        meshDatabase.addTag(tag: tempTag)
     }
 
     
@@ -186,7 +188,7 @@ extension SharingManager : NetworkServiceManagerDelegate {
                     
                     self.appendMessage(sent: false, contact: tempSender, message: tempMessage)
                     
-                    self.meshDatabase.addMessage(type: "message", id: tempMessage.getID(), name: tempMessage.getSender(), message: tempMessage.getMessage(), recipient: tempMessage.getRecipient())
+                    self.meshDatabase.addMessage(type: "message", message: tempMessage)
                     
                     //Notifies view controller of new message
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MessageNotification"), object: nil, userInfo: nil)
@@ -199,7 +201,7 @@ extension SharingManager : NetworkServiceManagerDelegate {
                 
                 //prevents duplicates. Will have to optimize later maybe
                 if !(DataProcessor.checkTagsEquality(tag: tempTag, tagList: self.tagList)) {
-                    self.meshDatabase.addTag(id: tempTag.getID(), name: tempTag.getTitle(), specifics: tempTag.getDescription(), long: tempTag.getLongitude(), lat: tempTag.getLatitude())
+                    self.meshDatabase.addTag(tag: tempTag)
                     self.tagList.append(tempTag)
                 } else {
                     //propagating tag to other phones nearby

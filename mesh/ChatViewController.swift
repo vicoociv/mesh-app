@@ -99,11 +99,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         //deletes white spaces and new lines
         let trimmedMessage = message?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if trimmedMessage != "" {
-            if chatType == .Direct {
-                SharingManager.sharedInstance.addMessage(unsent: false, username: username, msg: message!, contactName: contactName)
-            } else if chatType == .Public{
-                SharingManager.sharedInstance.addMessage(unsent: false, username: "public", msg: message!, contactName: "public")
-            }
+            SharingManager.sharedInstance.addMessage(sent: true, username: username, msg: message!, contactName: contactName)
             
             textView.text = ""
             textView.invalidateIntrinsicContentSize()
@@ -235,6 +231,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(forName:Notification.Name(rawValue:"NewConnectionFound"), object:nil, queue:nil) {
             notification in
             //self.sendUnsentMessages(notification: notification)
+            //only if contact is in unsent message list
         }
         
         //shifts view up when keyboard is activated
@@ -358,7 +355,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let tempMessage = self.messageList[tempIndex - 1]
-        if tempMessage.getSender() == "me" {
+        if tempMessage.getSender() == username {
             let cell = tableView.dequeueReusableCell(withIdentifier: "toCell", for: indexPath) as! ToMessageTableViewCell
             cell.messageText.text = tempMessage.getMessage()
             cell.status.text = "sent"

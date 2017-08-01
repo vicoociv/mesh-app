@@ -59,9 +59,9 @@ class meshDB {
         }
     }
     
-    func addMessage(type: String, id: Int, name: String, message: String, recipient: String) {
+    func addMessage(type: String, message: Message) {
         do {
-            let insert = info.insert(dataType <- type, intID <- id, title <- name, detail <- message, receiver <- recipient, longitude <- nil, latitude <- nil)
+            let insert = info.insert(dataType <- type, intID <- message.getID(), title <- message.getSender(), detail <- message.getMessage(), receiver <- message.getRecipient(), longitude <- nil, latitude <- nil)
             _ = try db!.run(insert)
         } catch {
             print("Insert failed")
@@ -74,30 +74,28 @@ class meshDB {
         do {
             for info in try db!.prepare(self.info) {
                 if info[dataType] == type {
-                if let tempID = info[intID] {
-                if let tempSender = info[title] {
-                if let tempReciever = info[receiver] {
-                if let tempMessage = info[detail] {
-                    let tempMessage = Message(id: tempID, sender: tempSender, message: tempMessage, recipient: tempReciever)
-                    
-                    //cannot make "me" a key!!!
-                    var key = ""
-                    let tempUsername = UIDevice.current.name
-                    if tempSender == "me" || tempSender == tempUsername{
-                        key = tempReciever
-                    } else if tempReciever == "me" || tempReciever == tempUsername{
-                        key = tempSender
-                    } else {
-                        key = "public"
-                    }
-                    
-                    if messageDict[key] == nil {
-                        messageDict[key] = [tempMessage]
-                    } else {
-                        messageDict[key]?.append(tempMessage)
-                    }
-                }
-                            }
+                    if let tempID = info[intID], let tempSender = info[title], let tempReciever = info[receiver], let tempMessage = info[detail] {
+                        var sentStatus = true
+                        if type == "unsentMessage" {
+                            sentStatus = false
+                        }
+                        
+                        let tempMessage = Message(sent: sentStatus, id: tempID, sender: tempSender, message: tempMessage, recipient: tempReciever)
+                        
+                        var key = ""
+                        let tempUsername = UIDevice.current.name
+                        if tempSender == tempUsername {
+                            key = tempReciever
+                        } else if tempReciever == tempUsername {
+                            key = tempSender
+                        } else {
+                            key = "public"
+                        }
+                        
+                        if messageDict[key] == nil {
+                            messageDict[key] = [tempMessage]
+                        } else {
+                            messageDict[key]?.append(tempMessage)
                         }
                     }
                 }
@@ -116,9 +114,9 @@ class meshDB {
         return getMessages(type: "message")
     }
 
-    func addTag(id: Int, name: String, specifics: String, long: Double, lat: Double) {
+    func addTag(tag: Tag) {
         do {
-            let insert = info.insert(dataType <- "tag", intID <- id, title <- name, detail <- specifics, receiver <- nil, longitude <- long, latitude <- lat)
+            let insert = info.insert(dataType <- "tag", intID <- tag.getID(), title <- tag.getTitle(), detail <- tag.getDescription(), receiver <- nil, longitude <- tag.getLongitude(), latitude <- tag.getLatitude())
             _ = try db!.run(insert)
         } catch {
             print("Insert failed")
@@ -130,17 +128,9 @@ class meshDB {
         var tagList = [Tag]()
         do {
             for info in try db!.prepare(self.info) {
-            if info[dataType] == "tag" {
-            if let tempID = info[intID] {
-            if let tempTitle = info[title] {
-            if let tempInfo = info[detail] {
-            if let tempLatitude = info[latitude] {
-            if let tempLogitude = info[longitude] {
-                tagList.append(Tag(id: tempID, title: tempTitle, coordinate: CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLogitude), info: tempInfo))
-                                    }
-                                }
-                            }
-                        }
+                if info[dataType] == "tag" {
+                    if let tempID = info[intID], let tempTitle = info[title], let tempInfo = info[detail], let tempLatitude = info[latitude], let tempLogitude = info[longitude] {
+                        tagList.append(Tag(id: tempID, title: tempTitle, coordinate: CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLogitude), info: tempInfo))
                     }
                 }
             }

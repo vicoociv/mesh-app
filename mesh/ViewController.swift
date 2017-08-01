@@ -123,9 +123,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if s != "" {
                 textField.text = "";
                 if chatType == .Direct {
-                    SharingManager.sharedInstance.addMessage(unsent: false, username: username, msg: s, contactName: contactName)
+                    SharingManager.sharedInstance.addMessage(sent: true, username: username, msg: s, contactName: contactName)
                 } else if chatType == .Public{
-                    SharingManager.sharedInstance.addMessage(unsent: false, username: "public", msg: s, contactName: "public")
+                    SharingManager.sharedInstance.addMessage(sent: true, username: "public", msg: s, contactName: "public")
                 }
                 
                 //add to info list here
@@ -137,24 +137,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    func sendUnsentMessages(notification: Notification) {
-        if let newContactName = notification.userInfo?["newContact"] as? String{
-            if let tempUnsentMessageList = SharingManager.sharedInstance.unsentMessageDict[newContactName] {
-                print("hello\n\n \(newContactName) \(tempUnsentMessageList.count)")
-                //CHECK HERE!!!!!!
-                var i = 0;
-                for msg in tempUnsentMessageList {
-                    SharingManager.sharedInstance.addMessage(unsent: true, username: msg.sender, msg: msg.message, contactName: msg.recipient)
-                    SharingManager.sharedInstance.meshDatabase.deleteMessage(msgToDelete: msg)
-                    SharingManager.sharedInstance.unsentMessageDict[newContactName]?.remove(at: i)
-                    print("Step 1")
-                    i += 1
-                }
-            }
-        } else {
-            NSLog("s", "No message to send")
-        }
-    }
+//    func sendUnsentMessages(notification: Notification) {
+//        if let newContactName = notification.userInfo?["newContact"] as? String{
+//            if let tempUnsentMessageList = SharingManager.sharedInstance.unsentMessageDict[newContactName] {
+//                print("hello\n\n \(newContactName) \(tempUnsentMessageList.count)")
+//                //CHECK HERE!!!!!!
+//                var i = 0;
+//                for msg in tempUnsentMessageList {
+//                    SharingManager.sharedInstance.addMessage(sent: true, username: msg.sender, msg: msg.message, contactName: msg.recipient)
+//                    SharingManager.sharedInstance.meshDatabase.deleteMessage(msgToDelete: msg)
+//                    SharingManager.sharedInstance.unsentMessageDict[newContactName]?.remove(at: i)
+//                    i += 1
+//                }
+//            }
+//        } else {
+//            NSLog("s", "No message to send")
+//        }
+//    }
     
     //updates the infoList by filtering main messageList in Sharing Manager
     private func updateMessageList() {

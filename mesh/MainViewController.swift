@@ -209,7 +209,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             if selectedList == .Discover && currentIndex == 1 {
                 upcoming.chatType = .Public
-                upcoming.contactName = "Public"
+                upcoming.contactName = "public"
             } else if selectedList == .Discover{
                 if SharingManager.sharedInstance.directConnections.count > 0 {
                     let contactNameTemp = self.discoverList[currentIndex - 1]

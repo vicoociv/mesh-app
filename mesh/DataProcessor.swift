@@ -29,11 +29,11 @@ class DataProcessor {
         let tempMessage = list[3]
         let tempReceiver = list[4]
 
-        return Message(id: tempID!, sender: tempSender, message: tempMessage, recipient: tempReceiver)
+        return Message(sent: true, id: tempID!, sender: tempSender, message: tempMessage, recipient: tempReceiver)
     }
     
-    static func getMessageToSend(id: Int, sender: String, message: String, receiver: String) -> String {
-        return "message\(separator)\(id)\(separator)\(sender)\(separator)\(message)\(separator)\(receiver)"
+    static func getMessageToSend(message: Message) -> String {
+        return "message\(separator)\(message.getID())\(separator)\(message.getSender())\(separator)\(message.getMessage())\(separator)\(message.getRecipient())"
     }
 
     static func filterMessages(contact: String, messageDict: [String: [Message]]) -> [String] {
@@ -42,7 +42,6 @@ class DataProcessor {
 
         if let list = messageDict[contact] {
             messageList = list
-            print("hellloooo")
         }
         
         for message in messageList {
@@ -74,8 +73,8 @@ class DataProcessor {
         return Tag(id: tempID!, title: tempTitle, coordinate: CLLocationCoordinate2D(latitude: tempLatitude!, longitude: tempLongitude!), info: tempDescription)
     }
     
-    static func getTagToSend(id: Int, title: String, description: String, latitude: Double, longitude: Double) -> String {
-        return "tag\(separator)\(id)\(separator)\(title)\(separator)\(description)\(separator)\(latitude)\(separator)\(longitude)"
+    static func getTagToSend(id: Int, tag: Tag) -> String {
+        return "tag\(separator)\(tag.getID())\(separator)\(tag.getTitle())\(separator)\(tag.getDescription())\(separator)\(tag.getLatitude())\(separator)\(tag.getLongitude())"
     }
     
     static func checkTagsEquality(tag: Tag, tagList: [Tag]) -> Bool {

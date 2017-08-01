@@ -12,26 +12,27 @@ import Foundation
 //need one more maps as well -_- maybe nickname too...
 
 class Message {
-    var sender: String
-    var message: String
-    var recipient: String
-    var intID: Int
-
+    private var sender: String!
+    private var message: String!
+    private var recipient: String!
+    private var intID: Int!
+    private var sent: Bool!
     
-    init(id: Int) {
-        intID = id
-        sender = ""
-        message = ""
-        recipient = ""
-    }
-    
-    init(id: Int, sender: String, message: String, recipient: String) {
+    init(sent: Bool, id: Int, sender: String, message: String, recipient: String) {
+        self.sent = sent
         self.intID = id
         self.sender = sender
         self.message = message
         self.recipient = recipient
     }
    
+    func getSentStatus() -> Bool {
+        return sent
+    }
+    
+    func setSentStatus(_ indicator: Bool) {
+        sent = indicator
+    }
     
     func getID() -> Int {
         return intID
