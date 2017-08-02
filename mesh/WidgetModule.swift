@@ -8,6 +8,58 @@
 
 import UIKit
 
+
+class NavigationBar: View {
+    
+    lazy var backButton: Button = {
+        let button = Button()
+        let image = UIImage(named: "backButton.png")
+        button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
+        return button
+    }()
+    
+    var shadowView: View = {
+        let shadow = View()
+        shadow.backgroundColor = UIColor.gray
+        shadow.frame = CGRect(x: 0, y: 69.3, width: UIScreen.main.bounds.width, height: 0.7)
+        return shadow
+    }()
+    
+    private func setupView() {
+        addSubview(backButton)
+        addSubview(shadowView)
+
+        backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        
+        shadowView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        shadowView.heightAnchor.constraint(equalToConstant: 0.7).isActive = true
+        shadowView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        shadowView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.masksToBounds = true
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.alpha = 0.95
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurEffectView)
+        
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class TabBar: UISegmentedControl {
     
     //if don't override this then will crash

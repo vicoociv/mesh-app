@@ -24,13 +24,12 @@ class NetworkServiceManager: NSObject {
     
     override init() {
         self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: NetworkServiceType)
-        
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: NetworkServiceType)
         
         super.init()
         self.serviceAdvertiser.delegate = self
-        self.serviceAdvertiser.startAdvertisingPeer()
         self.serviceBrowser.delegate = self
+        self.serviceAdvertiser.startAdvertisingPeer()
         self.serviceBrowser.startBrowsingForPeers()
     }
     
@@ -69,8 +68,6 @@ class NetworkServiceManager: NSObject {
     }
     
     func refresh() {
-        //self.serviceAdvertiser.stopAdvertisingPeer()
-        //self.serviceBrowser.stopBrowsingForPeers()
         self.serviceAdvertiser.startAdvertisingPeer()
         self.serviceBrowser.startBrowsingForPeers()
     }
@@ -99,15 +96,11 @@ extension NetworkServiceManager : MCNearbyServiceBrowserDelegate {
         browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
         
         let tempNewContact = ["newContact": peerID.displayName]
-        
-        //Hack here - Must update direct connections immediately
         SharingManager.sharedInstance.directConnections.append(peerID.displayName)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewConnectionFound"), object: nil, userInfo: tempNewContact)
     }
 
     internal func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        //Hack here - Must update direct connections immediately
-
         NSLog("%@", "lostPeer: \(peerID)")
     }
 }
@@ -118,7 +111,6 @@ extension MCSessionState {
             case .notConnected: return "NotConnected"
             case .connecting: return "Connecting"
             case .connected: return "Connected"
-            default: return "Unknown"
         }
     }
 }

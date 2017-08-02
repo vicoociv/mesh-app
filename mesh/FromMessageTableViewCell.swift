@@ -12,51 +12,46 @@ class FromMessageTableViewCell: UITableViewCell {
     
     let screenWidth = UIScreen.main.bounds.width
     
-    var nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.masksToBounds = true
-        label.textColor = UIColor.lightGray
+    var nameLabel: Label = {
+        let label = Label()
         label.font = UIFont(name: label.font.fontName, size: 12)
+        label.textColor = UIColor.lightGray
         return label
     }()
     
-    var contactBubble: Button = {
-        let button = Button()
-        button.layer.cornerRadius = 20
-        return button
+    var userIcon: UserIcon = {
+        let icon = UserIcon()
+        icon.setBounds(dimensions: 40)
+        let image = UIImage(named: "userIcon.png")
+        icon.imageView.image = image?.maskWithColor(color: UIColor.gray)
+        return icon
     }()
     
-    var messageText: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.masksToBounds = true
+    var messageText: Label = {
+        let label = Label()
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.textColor = UIColor.black
         return label
     }()
     
-    var textBubble: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.masksToBounds = true
+    var textBubble: View = {
+        let view = View()
         view.backgroundColor = UIColor.mediumGray
-        view.layer.cornerRadius = 17
+        view.layer.cornerRadius = 18
         view.alpha = 0.8
         return view
     }()
     
     private func setupView() {
-        contactBubble.backgroundColor = UIColor.lightGray
         addSubview(textBubble)
         addSubview(messageText)
         addSubview(nameLabel)
-        addSubview(contactBubble)
+        addSubview(userIcon)
         
-        messageText.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
-        messageText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
-        messageText.leadingAnchor.constraint(equalTo: contactBubble.trailingAnchor, constant: 20).isActive = true
+        messageText.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
+        messageText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+        messageText.leadingAnchor.constraint(equalTo: userIcon.trailingAnchor, constant: 20).isActive = true
         messageText.widthAnchor.constraint(lessThanOrEqualToConstant: 2 * screenWidth/3).isActive = true
         
         textBubble.topAnchor.constraint(equalTo: messageText.topAnchor, constant: -8).isActive = true
@@ -65,13 +60,13 @@ class FromMessageTableViewCell: UITableViewCell {
         textBubble.trailingAnchor.constraint(equalTo: messageText.trailingAnchor, constant: 12).isActive = true
         textBubble.widthAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: textBubble.bottomAnchor).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: textBubble.topAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: textBubble.leadingAnchor, constant: 7).isActive = true
         
-        contactBubble.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        contactBubble.bottomAnchor.constraint(equalTo: messageText.bottomAnchor).isActive = true
-        contactBubble.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        contactBubble.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        userIcon.topAnchor.constraint(equalTo: textBubble.topAnchor, constant: -2).isActive = true
+        userIcon.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        userIcon.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        userIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
     }
     
     required init(coder aDecoder: NSCoder) {

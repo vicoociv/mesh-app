@@ -14,6 +14,7 @@ extension UIColor {
     static let translucentWhite = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.4)
     static let translucentWhiteStrong = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.8)
     static let meshOrange = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 1)
+    static let meshOrangeLight = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 0.8)
 }
 
 extension UIImage {

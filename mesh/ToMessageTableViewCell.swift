@@ -9,22 +9,18 @@
 import UIKit
 
 class ToMessageTableViewCell: UITableViewCell {
-
+    
     let screenWidth = UIScreen.main.bounds.width
     
-    var status: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.masksToBounds = true
-        label.textColor = UIColor.meshOrange
+    var status: Label = {
+        let label = Label()
         label.font = UIFont(name: label.font.fontName, size: 12)
+        label.textColor = UIColor.meshOrange
         return label
     }()
-
-    var messageText: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.masksToBounds = true
+    
+    var messageText: Label = {
+        let label = Label()
         label.lineBreakMode = .byWordWrapping
         label.textColor = UIColor.white
         label.backgroundColor = UIColor.clear
@@ -32,8 +28,8 @@ class ToMessageTableViewCell: UITableViewCell {
         return label
     }()
     
-    var textBubble: Button = {
-        let view = Button()
+    var textBubble: View = {
+        let view = View()
         view.backgroundColor = UIColor.meshOrange
         view.layer.cornerRadius = 18
         view.alpha = 0.8
@@ -49,7 +45,7 @@ class ToMessageTableViewCell: UITableViewCell {
     
     private func setupView() {
         addSubview(status)
-
+        
         if photoView.image != nil {
             addSubview(photoView)
             
@@ -63,12 +59,12 @@ class ToMessageTableViewCell: UITableViewCell {
         } else {
             addSubview(textBubble)
             addSubview(messageText)
-        
+            
             messageText.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
             messageText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
             messageText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
             messageText.widthAnchor.constraint(lessThanOrEqualToConstant: 2 * screenWidth/3).isActive = true
-        
+            
             textBubble.topAnchor.constraint(equalTo: messageText.topAnchor, constant: -8).isActive = true
             textBubble.bottomAnchor.constraint(equalTo: messageText.bottomAnchor, constant: 8).isActive = true
             textBubble.leadingAnchor.constraint(equalTo: messageText.leadingAnchor, constant: -12).isActive = true

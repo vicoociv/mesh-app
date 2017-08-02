@@ -32,22 +32,15 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         return label
     }()
     
-    var navigationBar: View = {
-        let view = View()
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.alpha = 0.95
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
-        
-        let shadow = View()
-        shadow.backgroundColor = UIColor.gray
-        shadow.frame = CGRect(x: 0, y: 69.3, width: UIScreen.main.bounds.width, height: 0.7)
-        view.addSubview(shadow)
-        
+    var navigationBar: NavigationBar = {
+        let view = NavigationBar()
+        view.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         return view
     }()
+    
+    @objc private func back() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     lazy var tableView: TableView = {
         let table = TableView()
@@ -90,6 +83,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         let image = UIImage(named: "sendArrow.png")
         button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
+        button.isHidden = true
         return button
     }()
     
@@ -114,9 +108,10 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     }
     lazy var attachmentButton: Button = {
         let button = Button()
-        button.addTarget(self, action: #selector(clear), for: .touchUpInside)
         let image = UIImage(named: "paperclip.png")
         button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
+        button.addTarget(self, action: #selector(clear), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -169,14 +164,14 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         textViewBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         sendButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         sendButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
         sendButton.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 5).isActive = true
-        sendButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         
         attachmentButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        attachmentButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         attachmentButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
         attachmentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7).isActive = true
-        attachmentButton.trailingAnchor.constraint(equalTo: textView.leadingAnchor, constant: -5).isActive = true
         
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: textViewBackground.bottomAnchor).isActive = true
@@ -215,7 +210,12 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         updateMessageList()
         username = SharingManager.sharedInstance.username
-        screenTitle.text = contactName
+        
+        if contactName == "public" {
+            screenTitle.text = "Public Chat"
+        } else {
+            screenTitle.text = contactName
+        }
         setupView()
         
         //removing keyboard on tap
@@ -225,8 +225,8 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(forName:Notification.Name(rawValue:"MessageNotification"), object:nil, queue:nil) {
             notification in
             self.updateMessageList()
-            self.scrollToLatest()
             self.tableView.reloadData()
+            self.scrollToLatest()
         }
         NotificationCenter.default.addObserver(forName:Notification.Name(rawValue:"NewConnectionFound"), object:nil, queue:nil) {
             notification in
@@ -240,9 +240,6 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         
         //checks if the keyboard height changes with emoji keyboard etc.
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-        
-        sendButton.isHidden = true
-        attachmentButton.isHidden = true
     }
     
     @objc private func dismissKeyboard() {
@@ -254,6 +251,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         if chatType == .Public {
             if let list = SharingManager.sharedInstance.messageDict["public"] {
                 messageList = list
+                print(list.count)
             } else {
                 messageList = []
             }
@@ -311,7 +309,7 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         constraintHandler.getConstraint(object: "textView", type: "leftShrink").isActive = !indicator
         constraintHandler.getConstraint(object: "textView", type: "leftExpand").isActive = indicator
         constraintHandler.getConstraint(object: "textView", type: "rightShrink").isActive = !indicator
-        constraintHandler.getConstraint(object: "textView", type: "rightExpand").isActive = !indicator
+        constraintHandler.getConstraint(object: "textView", type: "rightExpand").isActive = indicator
     }
     
     private func scrollToLatest() {

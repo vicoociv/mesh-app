@@ -91,7 +91,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
         if tabButton.selectedSegmentIndex == 0{
-            self.performSegue(withIdentifier: "showChatView", sender: self)
         }
     }
     

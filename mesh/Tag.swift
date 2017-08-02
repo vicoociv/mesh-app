@@ -12,15 +12,8 @@ import MapKit
 class Tag: NSObject, MKAnnotation {
     var title: String?
     var coordinate: CLLocationCoordinate2D
-    var info: String
-    var intID: Int
-
-    init(id: Int) {
-        intID = id
-        title = ""
-        info = ""
-        coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    }
+    var info: String!
+    var intID: Int!
     
     init(id: Int, title: String, coordinate: CLLocationCoordinate2D, info: String) {
         self.intID = id

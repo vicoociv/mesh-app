@@ -50,13 +50,15 @@ class SharingManager {
         }
     }
     
-    func appendMessage(sent: Bool, contact: String, message: Message) {
+    func appendMessage(sent: Bool, message: Message) {
+        let contact = message.getRecipient()
         if !sent {
             if unsentMessageDict[contact] != nil {
                 unsentMessageDict[contact]?.append(message)
             } else {
                 unsentMessageDict[contact] = [message]
             }
+            message.setSentStatus(false)
         }
         if messageDict[contact] != nil {
             messageDict[contact]?.append(message)
@@ -64,13 +66,15 @@ class SharingManager {
             messageDict[contact] = [message]
         }
     }
-        func addMessage(sent: Bool, username: String, msg: String, contactName: String) {
+    
+    func addMessage(sent: Bool, username: String, msg: String, contactName: String) {
         let tempID = Int(arc4random_uniform(100000))
         let tempMessage = Message(sent: sent, id: tempID, sender: username, message: msg, recipient: contactName)
         
         if contactName == "public" || directConnections.contains(contactName){
             sendMessage(message: tempMessage)
-            appendMessage(sent: true, contact: contactName, message: tempMessage)
+            appendMessage(sent: true, message: tempMessage)
+
             if(!sent) {
                 meshDatabase.addMessage(type: "unsentMessage", message: tempMessage)
             } else {
@@ -78,10 +82,10 @@ class SharingManager {
             }
         } else if contactList.contains(contactName) {
             meshDatabase.addMessage(type: "message", message: tempMessage)
-            appendMessage(sent: false, contact: contactName, message: tempMessage)
+            appendMessage(sent: false, message: tempMessage)
         } else {
             meshDatabase.addMessage(type: "unsentMessage", message: tempMessage)
-            appendMessage(sent: false, contact: contactName, message: tempMessage)
+            appendMessage(sent: false, message: tempMessage)
         }
     }
     
@@ -129,42 +133,6 @@ class SharingManager {
             i += 1
         }
     }
-    
-    
-//getter functions
-    func getUsername() -> String {
-        return username
-    }
-    
-    func getdirectConnections() -> [String] {
-        return directConnections
-    }
-    
-    func getContactList() -> [String] {
-        return contactList
-    }
-    
-    func getTagList() -> [Tag] {
-        return tagList
-    }
-    
-    func getMessageDict() -> [String: [Message]] {
-        return messageDict
-    }
-    
-    func getUnsentMessageDict() -> [String: [Message]] {
-        return unsentMessageDict
-    }
-    
-    func getMessageList(name: String) -> [Message] {
-        let emptyArray = [Message]()
-        
-        if let list = messageDict[name] {
-            return list
-        } else {
-            return emptyArray
-        }
-    }
 }
 
 extension SharingManager : NetworkServiceManagerDelegate {
@@ -182,12 +150,11 @@ extension SharingManager : NetworkServiceManagerDelegate {
             
             if type == "message" {
                 let tempMessage = DataProcessor.decomposeMessage(message: dataString)
-                let tempSender = tempMessage.getSender()
                 let tempRecipient = tempMessage.getRecipient()
+                
                 if  tempRecipient == self.username || tempRecipient == "public"{
                     
-                    self.appendMessage(sent: false, contact: tempSender, message: tempMessage)
-                    
+                    self.appendMessage(sent: true, message: tempMessage)
                     self.meshDatabase.addMessage(type: "message", message: tempMessage)
                     
                     //Notifies view controller of new message
