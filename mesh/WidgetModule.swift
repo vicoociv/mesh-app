@@ -18,6 +18,13 @@ class NavigationBar: View {
         return button
     }()
     
+    lazy var refreshButton: Button = {
+        let button = Button()
+        let image = UIImage(named: "backButton.png")
+        button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
+        return button
+    }()
+    
     var shadowView: View = {
         let shadow = View()
         shadow.backgroundColor = UIColor.gray
@@ -26,8 +33,14 @@ class NavigationBar: View {
     }()
     
     private func setupView() {
+        addSubview(refreshButton)
         addSubview(backButton)
         addSubview(shadowView)
+        
+        refreshButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
+        refreshButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        refreshButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        refreshButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10).isActive = true
 
         backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
         backButton.heightAnchor.constraint(equalToConstant: 32).isActive = true

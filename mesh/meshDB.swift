@@ -159,7 +159,16 @@ class meshDB {
         }
     }
     
-    //limit of 10000 messages stored on phones. Also depends on number of contacts you have. The more contacts you have the less messages you can store per contact. Call this when exiting the app. 
+    func deleteTag(tagToDelete: Tag) {
+        do {
+            let data = info.filter(intID == tagToDelete.getID() && detail == tagToDelete.getDescription())
+            try db!.run(data.delete())
+        } catch {
+            print("Delete failed")
+        }
+    }
+    
+    //limit of 20000 messages stored on phones. Also depends on number of contacts you have. The more contacts you have the less messages you can store per contact. Call this when exiting the app.
     func clipMessageList(dict: [String: [Message]], numContacts: Int) {
         let max = 20000
         if dict.count > max {

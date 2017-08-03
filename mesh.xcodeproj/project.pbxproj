@@ -65,7 +65,6 @@
 		57DABE2C1F2FD67B00A29716 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DABE231F2FD67B00A29716 /* SystemConfiguration.framework */; };
 		57DABE2D1F2FD67B00A29716 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DABE241F2FD67B00A29716 /* UIKit.framework */; };
 		57DE5B451EB257050055A67E /* FromMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE5B441EB257050055A67E /* FromMessageTableViewCell.swift */; };
-		57DE5B471EB2AE700055A67E /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DE5B461EB2AE700055A67E /* PaddedLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,7 +200,6 @@
 		57DABE231F2FD67B00A29716 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		57DABE241F2FD67B00A29716 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57DE5B441EB257050055A67E /* FromMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromMessageTableViewCell.swift; sourceTree = "<group>"; };
-		57DE5B461EB2AE700055A67E /* PaddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		57FF8E391E27D59A00A307B4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -413,7 +411,6 @@
 			isa = PBXGroup;
 			children = (
 				57117BF91E45A3DE001018D7 /* MapViewController.swift */,
-				57DE5B461EB2AE700055A67E /* PaddedLabel.swift */,
 			);
 			name = OldViewController;
 			sourceTree = "<group>";
@@ -608,7 +605,6 @@
 				57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */,
 				5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */,
 				57DE5B451EB257050055A67E /* FromMessageTableViewCell.swift in Sources */,
-				57DE5B471EB2AE700055A67E /* PaddedLabel.swift in Sources */,
 				573A480D1F2FBBD200F6CD27 /* GroupsTableViewCell.swift in Sources */,
 				5711ED491E28960C0053F00B /* meshDB.swift in Sources */,
 				57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */,
