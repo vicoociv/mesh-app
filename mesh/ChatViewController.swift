@@ -24,14 +24,6 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         case Direct
     }
     
-    var screenTitle: Label = {
-        let label = Label()
-        label.font = UIFont(name: "Helvetica Neue", size: 18)
-        label.textAlignment = .center
-        label.textColor = UIColor.black
-        return label
-    }()
-    
     var navigationBar: NavigationBar = {
         let view = NavigationBar()
         view.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
@@ -153,11 +145,6 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        screenTitle.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -20).isActive = true
-        screenTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        screenTitle.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 16).isActive = true
-        screenTitle.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -16).isActive = true
-        
         textViewBackground.topAnchor.constraint(equalTo: textView.topAnchor, constant: -10).isActive = true
         textViewBackground.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: 15).isActive = true
         textViewBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -192,7 +179,6 @@ class ChatViewController: UIViewController, UITextViewDelegate {
     internal func setupView() {
         view.addSubview(tableView)
         view.addSubview(navigationBar)
-        view.addSubview(screenTitle)
         view.addSubview(textViewBackground)
         view.addSubview(textView)
         view.addSubview(sendButton)
@@ -212,9 +198,9 @@ class ChatViewController: UIViewController, UITextViewDelegate {
         username = SharingManager.sharedInstance.username
         
         if contactName == "public" {
-            screenTitle.text = "Public Chat"
+            navigationBar.barTitle.text = "Public Chat"
         } else {
-            screenTitle.text = contactName
+            navigationBar.barTitle.text = contactName
         }
         setupView()
         

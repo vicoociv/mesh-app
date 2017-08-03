@@ -18,13 +18,14 @@ class Map2ViewController: UIViewController {
     
     var navigationBar: NavigationBar = {
         let view = NavigationBar()
+        view.barTitle.text = "Maps"
         view.backButton.isHidden = true
         view.refreshButton.addTarget(self, action: #selector(refresh), for: .touchUpInside)
         return view
     }()
     
     @objc private func refresh() {
-        
+        clearAll()
     }
     
     private func setupView() {

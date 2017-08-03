@@ -11,6 +11,14 @@ import UIKit
 
 class NavigationBar: View {
     
+    var barTitle: Label = {
+        let label = Label()
+        label.font = UIFont(name: "Helvetica Neue", size: 18)
+        label.textAlignment = .center
+        label.textColor = UIColor.black
+        return label
+    }()
+    
     lazy var backButton: Button = {
         let button = Button()
         let image = UIImage(named: "backButton.png")
@@ -20,7 +28,7 @@ class NavigationBar: View {
     
     lazy var refreshButton: Button = {
         let button = Button()
-        let image = UIImage(named: "backButton.png")
+        let image = UIImage(named: "refreshIcon.png")
         button.setImage(image?.maskWithColor(color: UIColor.meshOrange), for: .normal)
         return button
     }()
@@ -33,18 +41,24 @@ class NavigationBar: View {
     }()
     
     private func setupView() {
+        addSubview(barTitle)
         addSubview(refreshButton)
         addSubview(backButton)
         addSubview(shadowView)
         
-        refreshButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
-        refreshButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        refreshButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        refreshButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10).isActive = true
+        barTitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        barTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        barTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        barTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        
+        refreshButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 28.5).isActive = true
+        refreshButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        refreshButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        refreshButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
 
-        backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 26).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         
         shadowView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
