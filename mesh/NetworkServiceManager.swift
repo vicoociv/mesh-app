@@ -58,7 +58,7 @@ class NetworkServiceManager: NSObject {
     }
     
     private func filterConnectedPeers(_ names: [String]) -> [MCPeerID]{
-        var result = [MCPeerID]()
+        var result: [MCPeerID] = []
         for id in session.connectedPeers {
             if names.contains(id.displayName) {
                 result.append(id)

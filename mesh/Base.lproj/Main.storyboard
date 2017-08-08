@@ -6,105 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
-        <scene sceneID="k6F-FC-A5k">
-            <objects>
-                <viewController storyboardIdentifier="MapViewController" id="Ni4-nv-3kU" customClass="MapViewController" customModule="mesh" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Lnm-9w-6hy"/>
-                        <viewControllerLayoutGuide type="bottom" id="gVW-CD-ZH5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mux-Dt-7wa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-3O-ERS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </mapView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0f-ah-Rn3">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Maps" id="eel-1A-Je0">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="dj2-cb-ZBe">
-                                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="refresh:" destination="Ni4-nv-3kU" id="zJZ-6P-VZC"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsk-do-2Ul">
-                                <rect key="frame" x="309" y="146" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="0gL-tH-Yk9"/>
-                                    <constraint firstAttribute="width" constant="50" id="93x-J9-TcJ"/>
-                                </constraints>
-                                <state key="normal" image="plus_button.png"/>
-                                <connections>
-                                    <action selector="recenter" destination="Ni4-nv-3kU" eventType="touchUpInside" id="pla-mG-vzT"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Tz-ci-HXt">
-                                <rect key="frame" x="87" y="612" width="200" height="36"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="UGE-R3-6OA"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Chat"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="switchView:" destination="Ni4-nv-3kU" eventType="valueChanged" id="cHi-Pq-yiH"/>
-                                </connections>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-oN-TDd">
-                                <rect key="frame" x="313" y="617" width="43" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fr4-bh-QT9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Clear"/>
-                                <connections>
-                                    <action selector="clear" destination="Ni4-nv-3kU" eventType="touchUpInside" id="8hT-aB-270"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Kpi-3O-ERS" firstAttribute="top" secondItem="B0f-ah-Rn3" secondAttribute="bottom" id="0Vk-Id-shR"/>
-                            <constraint firstItem="Lsk-do-2Ul" firstAttribute="top" secondItem="B0f-ah-Rn3" secondAttribute="bottom" constant="82" id="1n5-Hj-Qrn"/>
-                            <constraint firstAttribute="bottom" secondItem="9Tz-ci-HXt" secondAttribute="bottom" constant="20" symbolic="YES" id="5vp-fL-9tX"/>
-                            <constraint firstItem="Kpi-3O-ERS" firstAttribute="leading" secondItem="mux-Dt-7wa" secondAttribute="leading" id="8su-Hf-EAC"/>
-                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="leading" secondItem="mux-Dt-7wa" secondAttribute="leadingMargin" constant="71" id="DxA-ik-y4f"/>
-                            <constraint firstItem="V2t-oN-TDd" firstAttribute="bottom" secondItem="9Tz-ci-HXt" secondAttribute="bottom" id="Kxj-h1-qJb"/>
-                            <constraint firstAttribute="trailing" secondItem="Kpi-3O-ERS" secondAttribute="trailing" id="Lqh-P2-lmO"/>
-                            <constraint firstItem="B0f-ah-Rn3" firstAttribute="top" secondItem="Lnm-9w-6hy" secondAttribute="bottom" id="SnD-z4-lSP"/>
-                            <constraint firstItem="Kpi-3O-ERS" firstAttribute="trailing" secondItem="B0f-ah-Rn3" secondAttribute="trailing" id="WRD-Fs-dnh"/>
-                            <constraint firstItem="V2t-oN-TDd" firstAttribute="leading" secondItem="9Tz-ci-HXt" secondAttribute="trailing" constant="26" id="ZzA-zE-3BR"/>
-                            <constraint firstItem="Kpi-3O-ERS" firstAttribute="leading" secondItem="B0f-ah-Rn3" secondAttribute="leading" id="ccp-cR-u71"/>
-                            <constraint firstItem="9Tz-ci-HXt" firstAttribute="centerX" secondItem="mux-Dt-7wa" secondAttribute="centerX" id="cuw-UJ-MZZ"/>
-                            <constraint firstItem="Lsk-do-2Ul" firstAttribute="trailing" secondItem="mux-Dt-7wa" secondAttribute="trailingMargin" id="e2Q-5n-GGj"/>
-                            <constraint firstItem="V2t-oN-TDd" firstAttribute="centerX" secondItem="Lsk-do-2Ul" secondAttribute="centerX" id="hrC-BJ-PtZ"/>
-                            <constraint firstItem="Kpi-3O-ERS" firstAttribute="bottom" secondItem="gVW-CD-ZH5" secondAttribute="top" id="tVh-TZ-vsF"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="centerButton" destination="Lsk-do-2Ul" id="qz1-QS-fEM"/>
-                        <outlet property="mapView" destination="Kpi-3O-ERS" id="kuD-zl-zWq"/>
-                        <outlet property="tabButton" destination="9Tz-ci-HXt" id="q9i-J5-HWj"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hsK-SB-xTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1506" y="-57"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dhv-O7-dS8">
             <objects>
@@ -124,7 +28,7 @@
         <!--Item 2-->
         <scene sceneID="wPM-xn-JuF">
             <objects>
-                <viewController storyboardIdentifier="Map2ViewController" id="Z3n-Ty-wLT" customClass="Map2ViewController" customModule="mesh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="Z3n-Ty-wLT" customClass="MapViewController" customModule="mesh" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wUw-ry-egz"/>
                         <viewControllerLayoutGuide type="bottom" id="fqa-3Z-118"/>
@@ -200,7 +104,4 @@
             <point key="canvasLocation" x="1394" y="716"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="plus_button.png" width="720" height="720"/>
-    </resources>
 </document>

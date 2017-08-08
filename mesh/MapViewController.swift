@@ -1,101 +1,66 @@
 //
-//  MapViewController.swift
+//  Map2ViewController.swift
 //  mesh
 //
-//  Created by Victor Chien on 2/4/17.
+//  Created by Victor Chien on 7/31/17.
 //  Copyright © 2017 Victor Chien. All rights reserved.
 //
 
 import UIKit
-import MapKit
-import CoreLocation
+import GoogleMaps
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var centerButton: UIButton!
-    @IBOutlet weak var tabButton: UISegmentedControl!
+class MapViewController: UIViewController {
     
-    var locManager = CLLocationManager()
-    var currentLocation = CLLocation()
-    var currentLatitude = 0.0
-    var currentLongitude = 0.0
+    //must initialize in viewDidLoad or API key will not be called first
+    internal var mapView: GMSMapView!
+    internal var locationManager = CLLocationManager()
+    internal var markerList: [GMSMarker] = []
+    
+    var navigationBar: NavigationBar = {
+        let view = NavigationBar()
+        view.barTitle.text = "Maps"
+        view.backButton.isHidden = true
+        view.refreshButton.addTarget(self, action: #selector(refresh), for: .touchUpInside)
+        return view
+    }()
+    
+    @objc private func refresh() {
+        clearAll()
+        updateMarkers()
+    }
+    
+    private func setupView() {
+        navigationBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        navigationBar.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locManager.requestAlwaysAuthorization()
+        //map initiation code
+        mapView = GMSMapView(frame: self.view.bounds)
         mapView.delegate = self
-        locManager.delegate = self
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        //moves myLocationButton above tab bar on bottom
+        mapView.padding = UIEdgeInsets(top: 70, left: 0, bottom: 50, right: 0)
         
-        //to detect long press on map view
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        self.mapView.addGestureRecognizer(longPressRecognizer)
+        view.addSubview(mapView)
+        view.addSubview(navigationBar)
+        setupView()
 
-        mapView.showsUserLocation = true
-        mapView.showsScale = true
-        addAllAnnotations()
-    }
-    
-    @IBAction func refresh(_ sender: UIBarButtonItem) {
-        self.addAllAnnotations()
-    }
-    
-    //frees up map memory
-    override func viewWillDisappear(_ animated: Bool) {
-        mapView.showsUserLocation = false
-        mapView.delegate = nil
-        mapView.removeFromSuperview()
-        mapView = nil
-    }
-    
-    //sets the long and lat after location access is enabled
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                if CLLocationManager.isRangingAvailable() {
-                    currentLocation = locManager.location!
-                    currentLatitude = currentLocation.coordinate.latitude
-                    currentLongitude = currentLocation.coordinate.longitude
-                    zoomToRegion()
-                }
-            }
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
         }
+        
+        updateMarkers()
     }
     
-    func addAllAnnotations() {
-        let coordinateList = SharingManager.sharedInstance.tagList
-        for i in coordinateList {
-            mapView.addAnnotation(i)
-        }
-    }
-    
-    func removeAllAnnotations() {
-        let coordinateList = SharingManager.sharedInstance.tagList
-        for i in coordinateList {
-            mapView.removeAnnotation(i)
-        }
-    }
-    
-    func zoomToRegion() {
-        if locManager.location != nil {
-            let location = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-            let region = MKCoordinateRegionMakeWithDistance(location, 500.0, 700.0)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    @IBAction func recenter() {
-        zoomToRegion()
-    }
-    
-    @IBAction func switchView(_ sender: UISegmentedControl) {
-        if tabButton.selectedSegmentIndex == 0{
-        }
-    }
-    
-    private func addTag(latitude: Double, longitude: Double) {
-        //creates an popup - make into separate method later
+    internal func addTag(latitude: Double, longitude: Double) {
         let alert = UIAlertController(title: "New Tag", message: "", preferredStyle: UIAlertControllerStyle.alert)
         
         var titleField = UITextField()
@@ -116,71 +81,85 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         alert.addAction(UIAlertAction(title: "add", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
             
-            var resultTitle = ""
-            var resultDescription = ""
+            let resultTitle = titleField.text ?? "No Title"
+            let resultDescription = descriptionField.text ?? "No Description"
             
-            if let tempTitle = titleField.text {
-                resultTitle = tempTitle
-            }
-            
-            if let tempDescription = descriptionField.text {
-                resultDescription = tempDescription
-            }
-
             //makes sure title are not empty before adding tag
             if resultTitle != "" {
                 //send the coordinate to other devices.
                 SharingManager.sharedInstance.addTag(title: resultTitle, description: resultDescription, latitude: latitude, longitude: longitude)
-                
                 let tempResultTag = Tag(id: 0, title: resultTitle, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), info: resultDescription)
-                self.mapView.addAnnotation(tempResultTag)
+                self.createMarker(tempResultTag)
             }
         }))
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func clear() {
+    // Creates a marker in the center of the map.
+    internal func createMarker(_ tag: Tag) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: tag.getLatitude(), longitude: tag.getLongitude())
+        marker.layer.cornerRadius = 12
+        marker.opacity = 0.9
+        marker.title = tag.getTitle()
+        marker.snippet = tag.getDescription()
+        marker.map = mapView
+        markerList.append(marker)
+    }
+    
+    internal func updateMarkers() {
+        let coordinateList = SharingManager.sharedInstance.tagList
+        for tag in coordinateList {
+            createMarker(tag)
+        }
+    }
+    
+    internal func deleteMarker(marker: GMSMarker) {
+        if let indexToDelete = markerList.index(of: marker) {
+            let tagToDelete = SharingManager.sharedInstance.tagList[indexToDelete]
+            SharingManager.sharedInstance.meshDatabase.deleteTag(tagToDelete: tagToDelete)
+            SharingManager.sharedInstance.tagList.remove(at: indexToDelete)
+            marker.map = nil
+            markerList.remove(at: indexToDelete)
+        }
+    }
+    
+    internal func clearAll() {
         SharingManager.sharedInstance.meshDatabase.delete(toDelete: "tag")
         SharingManager.sharedInstance.tagList.removeAll()
+        mapView.clear()
+    }
+}
+
+extension Map2ViewController: GMSMapViewDelegate, CLLocationManagerDelegate {
+
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+        addTag(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
     
-    //adds a pin where user long presses the map
-    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
-            if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
-                let location = longPressGestureRecognizer.location(in: mapView)
-                let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
-                addTag(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    //sets the long and lat after location access is enabled
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    locationManager.startUpdatingLocation()
+                }
             }
-    }
-    
-//    //updates user location when phone is moved
-//    func mapView(_ mapView: MKMapView, didUpdate
-//        userLocation: MKUserLocation) {
-//        mapView.centerCoordinate = userLocation.location!.coordinate
-//    }
-    
-    
-    //used to customize annotation
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is Tag {
-            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
-            pin.pinTintColor = UIColor.red //store color and other properties in the tag object
-            pin.animatesDrop = true
-            pin.canShowCallout = true
-            
-            return pin
         }
-        return nil
     }
-    
-    //functionality of button on annotation
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        if let annotation = view.annotation as? Tag {
-//            mapView.removeAnnotation(annotation)
-//        }
-//    }
+
+    //Location Manager delegates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        self.mapView.animate(to: camera)
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
+

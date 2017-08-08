@@ -11,7 +11,6 @@
 		5706435E1DEB88B9008A033A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5706435C1DEB88B9008A033A /* Main.storyboard */; };
 		570643631DEB88B9008A033A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570643611DEB88B9008A033A /* LaunchScreen.storyboard */; };
 		5706436D1DEB8993008A033A /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706436C1DEB8993008A033A /* NetworkServiceManager.swift */; };
-		57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57117BF91E45A3DE001018D7 /* MapViewController.swift */; };
 		57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57117C031E45A655001018D7 /* CustomAnnotation.swift */; };
 		5711ED471E288D840053F00B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5711ED461E288D840053F00B /* Message.swift */; };
 		5711ED491E28960C0053F00B /* meshDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5711ED481E28960C0053F00B /* meshDB.swift */; };
@@ -48,7 +47,7 @@
 		57A5104E1F33A27D00BC5FC5 /* refreshIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 57A5104D1F33A27D00BC5FC5 /* refreshIcon.png */; };
 		57ADC1321E14E935003645BB /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */; };
 		57ADC1361E16065A003645BB /* SharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ADC1351E16065A003645BB /* SharingManager.swift */; };
-		57DABE001F2FCF9B00A29716 /* Map2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DABDFF1F2FCF9B00A29716 /* Map2ViewController.swift */; };
+		57DABE001F2FCF9B00A29716 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DABDFF1F2FCF9B00A29716 /* MapViewController.swift */; };
 		57DABE101F2FD5B000A29716 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DABE0D1F2FD5B000A29716 /* GoogleMapsBase.framework */; };
 		57DABE111F2FD5B000A29716 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DABE0E1F2FD5B000A29716 /* GoogleMaps.framework */; };
 		57DABE121F2FD5B000A29716 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DABE0F1F2FD5B000A29716 /* GoogleMapsCore.framework */; };
@@ -148,7 +147,6 @@
 		570643621DEB88B9008A033A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		570643641DEB88B9008A033A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5706436C1DEB8993008A033A /* NetworkServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServiceManager.swift; sourceTree = "<group>"; };
-		57117BF91E45A3DE001018D7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		57117C031E45A655001018D7 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		5711ED461E288D840053F00B /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		5711ED481E28960C0053F00B /* meshDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = meshDB.swift; sourceTree = "<group>"; };
@@ -184,7 +182,7 @@
 		57A5104D1F33A27D00BC5FC5 /* refreshIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshIcon.png; sourceTree = "<group>"; };
 		57ADC1311E14E935003645BB /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		57ADC1351E16065A003645BB /* SharingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingManager.swift; sourceTree = "<group>"; };
-		57DABDFF1F2FCF9B00A29716 /* Map2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map2ViewController.swift; sourceTree = "<group>"; };
+		57DABDFF1F2FCF9B00A29716 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		57DABE0D1F2FD5B000A29716 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		57DABE0E1F2FD5B000A29716 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		57DABE0F1F2FD5B000A29716 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
@@ -296,7 +294,6 @@
 		571896C21E53E92D00FE2934 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				57A5103C1F305F7500BC5FC5 /* OldViewController */,
 				573A47A01F2F01E400F6CD27 /* MainScreen */,
 				573A479F1F2F01D500F6CD27 /* ChatViewController */,
 				573A479E1F2F01C400F6CD27 /* MapViewController */,
@@ -349,7 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				57DABE131F2FD5BD00A29716 /* Frameworks */,
-				57DABDFF1F2FCF9B00A29716 /* Map2ViewController.swift */,
+				57DABDFF1F2FCF9B00A29716 /* MapViewController.swift */,
 				57117C031E45A655001018D7 /* CustomAnnotation.swift */,
 				5739328D1E5A4AC000C4CF2A /* CustomCalloutView.swift */,
 			);
@@ -408,14 +405,6 @@
 				57872E8D1E331D54009E5F4C /* DataProcessor.swift */,
 			);
 			name = Other;
-			sourceTree = "<group>";
-		};
-		57A5103C1F305F7500BC5FC5 /* OldViewController */ = {
-			isa = PBXGroup;
-			children = (
-				57117BF91E45A3DE001018D7 /* MapViewController.swift */,
-			);
-			name = OldViewController;
 			sourceTree = "<group>";
 		};
 		57DABE131F2FD5BD00A29716 /* Frameworks */ = {
@@ -606,13 +595,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57117BFA1E45A3DE001018D7 /* MapViewController.swift in Sources */,
 				5739328E1E5A4AC000C4CF2A /* CustomCalloutView.swift in Sources */,
 				57DE5B451EB257050055A67E /* FromMessageTableViewCell.swift in Sources */,
 				573A480D1F2FBBD200F6CD27 /* GroupsTableViewCell.swift in Sources */,
 				5711ED491E28960C0053F00B /* meshDB.swift in Sources */,
 				57117C041E45A655001018D7 /* CustomAnnotation.swift in Sources */,
-				57DABE001F2FCF9B00A29716 /* Map2ViewController.swift in Sources */,
+				57DABE001F2FCF9B00A29716 /* MapViewController.swift in Sources */,
 				57ADC1361E16065A003645BB /* SharingManager.swift in Sources */,
 				57555AAF1F2C67570006290D /* ChatViewController.swift in Sources */,
 				573A480E1F2FBBD200F6CD27 /* UserIcon.swift in Sources */,
